@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="content__inner">
+        <div class="form_table">
+            {% include 'main/search__form.html' %}
+            <div class="upper_wrapper">
+                <div class="wrapper-search-tables">
+                    <div class="content--header_text">
+                        <h5>По вашему запросу найдено записей: {{count_cases}} </h5>
+                    </div>
+                    {% include 'main/search__table.html' %}
+                <div class="pagination_block" >
+                    {% include 'main/search__pagination.html' %}
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

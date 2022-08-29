@@ -1,0 +1,103 @@
+<form action="{% url 'search' %}" method="GET">
+    <div class="content--header_text">
+        <h4>ПОИСК ПО СУДЕБНЫМ ДЕЛАМ</h4>
+    </div>
+    <div class="form__container">
+        <div class="block_elements">
+            <div class="block__element">
+                <h2>Суд</h2>
+                <div class="select-box">
+                    <div class="options-container">
+                        {% for court in courts %}
+                          <div class="option">
+                            <input type="radio" class="radio" id="{{ court }}" name="Court" value="{{ court }}" />
+                            <label for="{{ court }}">{{ court }}</label>
+                          </div>
+                        {% endfor %}
+                    </div>
+                    <div class="selected boarder_around">
+                      Выберите суд
+                    </div>
+                </div>
+            </div>
+            <div class="block__element">
+                <h2>Инстанция</h2>
+                <div class="select-box">
+                    <div class="options-container">
+                        {% for instance in instances %}
+                          <div class="option">
+                            <input type="radio" class="radio" id="{{ instance }}" name="Instance" value="{{ instance }}" />
+                            <label for="{{ instance }}">{{ instance }}</label>
+                          </div>
+                        {% endfor %}
+                    </div>
+                    <div class="selected boarder_around">
+                      Выберите инстанцию
+                    </div>
+                </div>
+            </div>
+            <div class="block__element">
+                <h2>Вид судопроизводства</h2>
+                <div class="select-box">
+                    <div class="options-container">
+                        {% for type_of_legal_proceeding in type_of_legal_proceedings %}
+                          <div class="option">
+                            <input type="radio" class="radio" id="{{ type_of_legal_proceeding }}" name="type_of_legal_proceeding" value="{{ type_of_legal_proceeding }}" />
+                            <label for="{{ type_of_legal_proceeding }}">{{ type_of_legal_proceeding }}</label>
+                          </div>
+                        {% endfor %}
+                    </div>
+                    <div class="selected boarder_around">
+                      Выберите вид судопроизводства
+                    </div>
+                </div>
+            </div>
+            <div class="block__element">
+                <h2 class="form__label">Номер дела, материала, жалобы или<br>производства</h2>
+                <input type="text" class="form_input_id boarder_around" autocomplete="off" name="ObjectID" placeholder="например, 77OS0000-05-2018-008038-16" >
+            </div>
+            <div class="block__element">
+                <h2>Судья</h2>
+                <div class="select-box">
+                    <div class="options-container">
+                        {% for judge in judges %}
+                          <div class="option">
+                            <input type="radio" class="radio" id="{{ judge }}" name="Judge" value="{{ judge }}" />
+                            <label for="{{ judge }}">{{ judge }}</label>
+                          </div>
+                        {% endfor %}
+                    </div>
+                    <div class="selected boarder_around">
+                      Выберите судью
+                    </div>
+                </div>
+            </div>
+            <div class="block__element">
+                <h2>Год</h2>
+                <div class="select-box">
+                    <div class="options-container">
+                        {% for year in years %}
+                          <div class="option">
+                            <input type="radio" class="radio" id="{{ year }}" name="Date" value="{{ year }}" />
+                            <label for="{{ year }}">{{ year }}</label>
+                          </div>
+                        {% endfor %}
+                    </div>
+                    <div class="selected boarder_around">
+                      Выберите год
+                    </div>
+                </div>
+            </div>
+            <div class="block__element">
+                <h2 class="form__label">Стороны</h2>
+                <input type="text" class="form_input_id boarder_around" autocomplete="off" name="Name_people" placeholder="Фамилия И.О. или наименование организации" >
+            </div>
+        </div>
+    </div>
+    <div class="btn_div">
+        <input type="submit" value="Найти" class="btn" />
+        <div class="show_all">
+            <a href="{% url 'search' %}">Показать все</a>
+        </div>
+    </div>
+</form>

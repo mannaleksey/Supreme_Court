@@ -1,0 +1,102 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/style_old.css' %}" media="all">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@800&family=Open+Sans:wght@400;800&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="content">
+            <div class="header">
+                <p class="header_text">ПОИСК ПО СУДЕБНЫМ ДЕЛАМ</p>
+            </div>
+
+            <form action="{% url 'search' %}" method="GET">
+                <div class="container">
+                    <div class="block_elements">
+                        <h2>Категория</h2>
+                        <div class="select-box">
+                            <div class="options-container">
+                                {% for category in categories %}
+                                  <div class="option">
+                                    <input type="radio" class="radio" id="{{ category }}" name="Category" value="{{ category }}" />
+                                    <label for="{{ category }}">{{ category }}</label>
+                                  </div>
+                                {% endfor %}
+                            </div>
+                            <div class="selected">
+                              Выберите категорию
+                            </div>
+                        </div><br>
+                        <h2>Комната</h2>
+                        <div class="select-box">
+                            <div class="options-container">
+                                {% for room in rooms %}
+                                  <div class="option">
+                                    <input type="radio" class="radio" id="{{ room }}" name="Room" value="{{ room }}" />
+                                    <label for="{{ room }}">{{ room }}</label>
+                                  </div>
+                                {% endfor %}
+                            </div>
+                            <div class="selected">
+                              Выберите комнату
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block_elements">
+                        <h2 class="form__label">Уникальный идентификатор дела</h2>
+                        <input type="text" class="form_input_id" autocomplete="off" name="StringNumber" placeholder="например, 77OS0000-05-2018-008038-16" >
+                    </div>
+                </div>
+                <div class="btn_div">
+                    <input type="submit" value="Найти" class="btn" />
+                </div>
+            </form>
+
+            <div class="wrapper-search-tables">
+                <table class="custom_table">
+                    <thead>
+                        <tr>
+                            <th>Номер заказа</th>
+                            <th>Истец</th>
+                            <th>Ответчик</th>
+                            <th>Категория</th>
+                            <th>Дата начала</th>
+                            <th>Комната</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in page_obj %}
+                            <tr>
+                                <td>{{ data.StringNumber }}</td>
+                                <td>{{ data.Plaintiff }}</td>
+                                <td>{{ data.Defendant }}</td>
+                                <td>{{ data.Category }}</td>
+                                <td>{{ data.DateBegin }}</td>
+                                <td>{{ data.Room }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            <br>
+            </div>
+            <div class="grid-img-right mt-4 text-right bg bg1" >
+                {% include 'main/pagination.html' %}
+            </div>
+        </div>
+        <footer class="footer">
+            <h>end</h>
+        </footer>
+    </div>
+</body>
+
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/clear_get.js' %}"></script>
+</html>

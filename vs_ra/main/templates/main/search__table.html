@@ -1,0 +1,24 @@
+<table class="custom_table">
+    <thead>
+        <tr>
+            <th>Номер заказа</th>
+            <th>Стороны</th>
+            <th>Текущее состояние</th>
+            <th>Судья</th>
+            <th>Статья</th>
+            <th>Категория дела</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in page_obj %}
+            <tr>
+                <td><a target="_blank" href="/detail?ObjectID={{ data.ObjectID }}">{{ data.StringNumber }}</a></td>
+                <td><b>Истец: </b>{{ data.Plaintiff }}<br><b>Ответчик: </b>{{ data.Defendant }}</td>
+                <td>{{ data.StateName }}</td>
+                <td>{{ data.Judge }}</td>
+                <td>{{ data.ArticleCC }}</td>
+                <td>{{ data.Category }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

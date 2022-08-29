@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="content--header_text">
+    <h4>Информация по делу № {{ data.StringNumber }}</h4>
+    </div>
+    <div class="content__inner content_details">
+        <div class="list_of_case">
+            <div class="row_card">
+                <div class="left">Уникальный идентификатор дела</div>
+                <div class="right">{{ data.ObjectID }}</div>
+            </div>
+            <div class="row_card">
+                <div class="left">Номер</div>
+                <div class="right">{{ data.StringNumber }}</div>
+            </div>
+            <div class="row_card">
+                <div class="left">Стороны</div>
+                <div class="right"><b>Истец: </b>{{ data.Plaintiff }}<br><b>Ответчик: </b>{{ data.Defendant }}</div>
+            </div>
+            <div class="row_card">
+                <div class="left">Дата</div>
+                <div class="right">{{ data.Date }}</div>
+            </div>
+            <div class="row_card">
+                <div class="left">Категория дела</div>
+                <div class="right">{{ data.Category }}</div>
+            </div>
+            <div class="row_card">
+                <div class="left">Текущее состояние</div>
+                <div class="right">{{ data.StateName }}</div>
+            </div>
+        </div>
+        <div class="btn_div go_back">
+        <input type="submit" class="btn" onclick="history.back() || $.searchForm.goBack('/mgs/services/cases/appeal-civil?courtInternalName=mgs'); return false;" value="Вернуться к списку"/>
+        </div>
+    </div>
+</div>
+{% endblock %}
