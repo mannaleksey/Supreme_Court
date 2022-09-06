@@ -13,7 +13,12 @@
         {% for data in page_obj %}
             <tr>
                 <td><a target="_blank" href="/detail?ObjectID={{ data.ObjectID }}">{{ data.StringNumber }}</a></td>
-                <td><b>Истец: </b>{{ data.Plaintiff }}<br><b>Ответчик: </b>{{ data.Defendant }}</td>
+                {% if not data.Accused %}
+                    <td><b>Истец: </b>{{ data.Plaintiff }}<br><b>Ответчик: </b>{{ data.Defendant }}</td>
+                {% endif %}
+                {% if data.Accused %}
+                    <td><b>Обвиняемый: </b>{{ data.Accused }}</td>
+                {% endif %}
                 <td>{{ data.StateName }}</td>
                 <td>{{ data.Judge }}</td>
                 <td>{{ data.ArticleCC }}</td>

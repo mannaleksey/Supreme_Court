@@ -49,6 +49,7 @@ def sort_full_name(request, one_filter):
 
 def search(request):
     data_case = DataCase.objects.all()
+    key_for_accused = False
     filters = {}
     params = '&'
     if request.method == "GET":
@@ -61,6 +62,8 @@ def search(request):
             if one_filter in list_keys:
                 if request.GET[one_filter]:
                     if one_filter == 'type_of_legal_proceeding':
+                        if request.GET[one_filter] == 'Уголовное':
+                            key_for_accused = True
                         detail_filters = const_type_of_legal_proceedings_sort[request.GET[one_filter]]
                         temp_filter = Q(**{one_filter: detail_filters[0]})
                         for detail_filter in detail_filters[1:]:
@@ -72,7 +75,6 @@ def search(request):
                         full_name = sort_full_name(request, one_filter)
                         filters[f'{one_filter}__icontains'] = full_name
                     elif one_filter == 'Name_people':
-                        print(request.GET[one_filter])
                         temp_filter = Q(**{'Plaintiff__icontains': request.GET[one_filter]})
                         temp_filter.add(Q(**{'Defendant__icontains': request.GET[one_filter]}), Q.OR)
                         data_case = data_case.filter(temp_filter)
@@ -91,6 +93,7 @@ def search(request):
             "years": const_years,
             "page_obj": page_split(data_case, request),
             "params": params,
-            "count_cases": len(data_case)
+            "count_cases": len(data_case),
+            "key_for_accused": key_for_accused,
         }
         return render(request, 'main/search.html', context)
