@@ -16,7 +16,12 @@
                         {% endfor %}
                     </div>
                     <div class="selected boarder_around">
-                      Выберите суд
+                        {% if data_for_default.Court %}
+                            {{ data_for_default.Court }}
+                        {% endif %}
+                        {% if not data_for_default.Court %}
+                            Выберите суд
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -32,7 +37,12 @@
                         {% endfor %}
                     </div>
                     <div class="selected boarder_around">
-                      Выберите инстанцию
+                        {% if data_for_default.Instance %}
+                            {{ data_for_default.Instance }}
+                        {% endif %}
+                        {% if not data_for_default.Instance %}
+                            Выберите инстанцию
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -48,13 +58,24 @@
                         {% endfor %}
                     </div>
                     <div class="selected boarder_around">
-                      Выберите вид судопроизводства
+                        {% if data_for_default.type_of_legal_proceeding %}
+                            {{ data_for_default.type_of_legal_proceeding }}
+                        {% endif %}
+                        {% if not data_for_default.type_of_legal_proceeding %}
+                            Выберите вид судопроизводства
+                        {% endif %}
                     </div>
                 </div>
             </div>
             <div class="block__element">
                 <h2 class="form__label">Номер дела, материала, жалобы или<br>производства</h2>
-                <input type="text" class="form_input_id boarder_around" autocomplete="off" name="ObjectID" placeholder="например, 77OS0000-05-2018-008038-16" >
+                {% if data_for_default.ObjectID %}
+                    <input type="text" class="form_input_id boarder_around" autocomplete="off" name="ObjectID" placeholder="например, 77OS0000-05-2018-008038-16" value="{{ data_for_default.ObjectID }}">
+
+                {% endif %}
+                {% if not data_for_default.ObjectID %}
+                    <input type="text" class="form_input_id boarder_around" autocomplete="off" name="ObjectID" placeholder="например, 77OS0000-05-2018-008038-16" value>
+                {% endif %}
             </div>
             <div class="block__element">
                 <h2>Судья</h2>
@@ -68,7 +89,12 @@
                         {% endfor %}
                     </div>
                     <div class="selected boarder_around">
-                      Выберите судью
+                        {% if data_for_default.Judge %}
+                            {{ data_for_default.Judge }}
+                        {% endif %}
+                        {% if not data_for_default.Judge %}
+                            Выберите судью
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -84,13 +110,24 @@
                         {% endfor %}
                     </div>
                     <div class="selected boarder_around">
-                      Выберите год
+                        {% if data_for_default.Date %}
+                            {{ data_for_default.Date }}
+                        {% endif %}
+                        {% if not data_for_default.Date %}
+                            Выберите год
+                        {% endif %}
                     </div>
                 </div>
             </div>
             <div class="block__element">
                 <h2 class="form__label">Стороны</h2>
-                <input type="text" class="form_input_id boarder_around" autocomplete="off" name="Name_people" placeholder="Фамилия И.О. или наименование организации" >
+                {% if data_for_default.Name_people %}
+                        <input type="text" class="form_input_id boarder_around" autocomplete="off" name="Name_people" placeholder="Фамилия И.О. или наименование организации" value="{{ data_for_default.Name_people }}">
+
+                {% endif %}
+                {% if not data_for_default.Name_people %}
+                    <input type="text" class="form_input_id boarder_around" autocomplete="off" name="Name_people" placeholder="Фамилия И.О. или наименование организации" value>
+                {% endif %}
             </div>
         </div>
     </div>

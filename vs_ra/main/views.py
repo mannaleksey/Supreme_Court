@@ -81,6 +81,13 @@ def search(request):
                     else:
                         filters[f'{one_filter}'] = request.GET[one_filter]
                     params += f'{one_filter}={request.GET[one_filter]}'
+
+        data_for_default = {}
+        for i in ['Court', 'Instance', 'type_of_legal_proceeding', 'ObjectID', 'Judge', 'Date', 'Name_people']:
+            try:
+                data_for_default[i] = request.GET[i]
+            except:
+                data_for_default[i] = ''
         data_case = data_case.filter(**filters)
         if params == '&':
             params = ''
@@ -95,5 +102,6 @@ def search(request):
             "params": params,
             "count_cases": len(data_case),
             "key_for_accused": key_for_accused,
+            "data_for_default": data_for_default,
         }
         return render(request, 'main/search.html', context)

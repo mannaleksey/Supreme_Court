@@ -19,7 +19,7 @@ class DataCase(models.Model):
     Defendant = models.CharField('Ответчик', max_length=100, default='', blank=True)
     HearingsCase = models.TextField('Слушания по делу', default='', blank=True)
     Accused = models.CharField('Обвиняемый', max_length=100, default='', blank=True)
-    ObjectID = models.CharField('Идентификатор объекта', max_length=80, primary_key=True)
+    ObjectID = models.CharField('Идентификатор объекта', max_length=80, default='', blank=True)
 
     def __str__(self):
         return self.StringNumber

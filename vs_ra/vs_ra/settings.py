@@ -136,6 +136,6 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_BEAT_SCHEDULE = {
     'db_task': {
         'task': 'main.tasks.refresh_db',
-        'schedule': 150.0,
+        'schedule': 240.0,
     }
 }
