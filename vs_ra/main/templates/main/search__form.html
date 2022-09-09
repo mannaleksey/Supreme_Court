@@ -10,7 +10,12 @@
                     <div class="options-container">
                         {% for court in courts %}
                           <div class="option">
-                            <input type="radio" class="radio" id="{{ court }}" name="Court" value="{{ court }}" />
+                            {% if data_for_default.Court == court %}
+                                <input type="radio" class="radio" id="{{ court }}" name="Court" value="{{ court }}" checked/>
+                            {% endif %}
+                            {% if data_for_default.Court != court %}
+                                <input type="radio" class="radio" id="{{ court }}" name="Court" value="{{ court }}" />
+                            {% endif %}
                             <label for="{{ court }}">{{ court }}</label>
                           </div>
                         {% endfor %}
@@ -31,7 +36,12 @@
                     <div class="options-container">
                         {% for instance in instances %}
                           <div class="option">
-                            <input type="radio" class="radio" id="{{ instance }}" name="Instance" value="{{ instance }}" />
+                            {% if data_for_default.Instance == instance %}
+                                <input type="radio" class="radio" id="{{ instance }}" name="Instance" value="{{ instance }}" checked/>
+                            {% endif %}
+                            {% if data_for_default.Instance != instance %}
+                                <input type="radio" class="radio" id="{{ instance }}" name="Instance" value="{{ instance }}" />
+                            {% endif %}
                             <label for="{{ instance }}">{{ instance }}</label>
                           </div>
                         {% endfor %}
@@ -52,7 +62,12 @@
                     <div class="options-container">
                         {% for type_of_legal_proceeding in type_of_legal_proceedings %}
                           <div class="option">
-                            <input type="radio" class="radio" id="{{ type_of_legal_proceeding }}" name="type_of_legal_proceeding" value="{{ type_of_legal_proceeding }}" />
+                            {% if data_for_default.type_of_legal_proceeding == type_of_legal_proceeding %}
+                                <input type="radio" class="radio" id="{{ type_of_legal_proceeding }}" name="type_of_legal_proceeding" value="{{ type_of_legal_proceeding }}" checked/>
+                            {% endif %}
+                            {% if data_for_default.type_of_legal_proceeding != type_of_legal_proceeding %}
+                                <input type="radio" class="radio" id="{{ type_of_legal_proceeding }}" name="type_of_legal_proceeding" value="{{ type_of_legal_proceeding }}"/>
+                            {% endif %}
                             <label for="{{ type_of_legal_proceeding }}">{{ type_of_legal_proceeding }}</label>
                           </div>
                         {% endfor %}
@@ -83,7 +98,12 @@
                     <div class="options-container">
                         {% for judge in judges %}
                           <div class="option">
-                            <input type="radio" class="radio" id="{{ judge }}" name="Judge" value="{{ judge }}" />
+                            {% if data_for_default.Judge == judge %}
+                                <input type="radio" class="radio" id="{{ judge }}" name="Judge" value="{{ judge }}" checked/>
+                            {% endif %}
+                            {% if data_for_default.Judge != judge %}
+                                <input type="radio" class="radio" id="{{ judge }}" name="Judge" value="{{ judge }}" />
+                            {% endif %}
                             <label for="{{ judge }}">{{ judge }}</label>
                           </div>
                         {% endfor %}
@@ -104,7 +124,12 @@
                     <div class="options-container">
                         {% for year in years %}
                           <div class="option">
-                            <input type="radio" class="radio" id="{{ year }}" name="Date" value="{{ year }}" />
+                            {% if data_for_default.Date == year %}
+                                <input type="radio" class="radio" id="{{ year }}" name="Date" value="{{ year }}" checked/>
+                            {% endif %}
+                            {% if data_for_default.Date != year %}
+                                <input type="radio" class="radio" id="{{ year }}" name="Date" value="{{ year }}" />
+                            {% endif %}
                             <label for="{{ year }}">{{ year }}</label>
                           </div>
                         {% endfor %}
