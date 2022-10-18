@@ -55,11 +55,11 @@ def search(request):
     params = ''
     if request.method == "GET":
         list_keys = list(request.GET.keys())
-        # print(list_keys)
+        print(list_keys)
         if 'Date' in list_keys:
             filters['Date__year'] = request.GET['Date']
             params += f'&Date={request.GET["Date"]}'
-        if 'type_of_legal_proceeding' not in list_keys and 'ObjectID' not in list_keys:
+        if ('type_of_legal_proceeding' not in list_keys) and ('ObjectID' not in list_keys):
             detail_filters = const_type_of_legal_proceedings_sort['Административное']
             temp_filter = Q(**{'type_of_legal_proceeding': detail_filters[0]})
             for i in const_type_of_legal_proceedings_sort:
