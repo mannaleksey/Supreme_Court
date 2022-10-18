@@ -194,7 +194,7 @@ form {
   order: 1;
   position: absolute;
   top: 31px;
-  z-index: 1;
+  z-index: 0;
 }
 .select-box .options-container::-webkit-scrollbar {
   width: 8px;
@@ -206,6 +206,7 @@ form {
   border-radius: 0 3px 3px 0;
 }
 .select-box .options-container.active {
+  z-index: 1;
   max-height: 244px;
   opacity: 1;
   overflow-y: scroll;
@@ -222,6 +223,7 @@ form {
   cursor: pointer;
   display: block;
   padding: 6px 10px;
+  min-height: 30px;
 }
 .select-box .selected {
   font-weight: 100;
@@ -231,6 +233,7 @@ form {
   order: 0;
   position: relative;
   padding: 6px 10px;
+  min-height: 35px;
 }
 .select-box .selected:after {
   border-bottom: 0;
@@ -415,7 +418,7 @@ form {
 .wrapper-search-tables .custom_table th {
   padding: 0.5rem 1rem;
   letter-spacing: 0.01rem;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 900;
   border: 1px solid #bcc7ce;
 }
@@ -424,7 +427,7 @@ form {
 }
 .wrapper-search-tables .custom_table td {
   padding: 0.5rem 1rem;
-  font-size: 0.7rem;
+  font-size: 0.85rem;
   border: 1px solid #bcc7ce;
 }
 .wrapper-search-tables .custom_table tr:nth-child(even) {

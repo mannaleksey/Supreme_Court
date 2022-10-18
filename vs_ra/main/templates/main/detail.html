@@ -69,6 +69,36 @@
                 <div class="right">{{ data.Judge }}</div>
             </div>
             {% endif %}
+            {% if data.PresidingJudge %}
+            <div class="row_card">
+                <div class="left">Председательсвующий судья</div>
+                <div class="right">{{ data.PresidingJudge }}</div>
+            </div>
+            {% endif %}
+            {% if data.JudgeSpeaker %}
+            <div class="row_card">
+                <div class="left">Судья докладчик</div>
+                <div class="right">{{ data.JudgeSpeaker }}</div>
+            </div>
+            {% endif %}
+            {% if data.ThirdJudge %}
+            <div class="row_card">
+                <div class="left">Третий судья</div>
+                <div class="right">{{ data.ThirdJudge }}</div>
+            </div>
+            {% endif %}
+            {% if data.FourthJudge %}
+            <div class="row_card">
+                <div class="left">Четвертый судья</div>
+                <div class="right">{{ data.FourthJudge }}</div>
+            </div>
+            {% endif %}
+            {% if data.FifthJudge %}
+            <div class="row_card">
+                <div class="left">Пятый судья</div>
+                <div class="right">{{ data.FifthJudge }}</div>
+            </div>
+            {% endif %}
             {% if data.Document %}
             <div class="row_card">
                 <div class="left">Судебный акт</div>

@@ -9,13 +9,21 @@ const_courts_short = {
     'Очамчырский районный суд': 'och', 'Ткуарчалский районный суд': 'tku', 'Военный суд Республики Абхазия': 'voin'
 }
 const_instances = ['Первая', 'Кассационная', 'Надзорная']
+const_instances_short = {
+    'Первая': ['DecisionCS', 'DecisionKAS', 'DecisionUS'],
+    'Кассационная': ['DecisionCA', 'DecisionCAKAS', 'DecisionDA', 'DecisionUA'],
+    'Надзорная': ['DecisionUNK', 'DecisionUN', 'DecisionCNK', 'DecisionCN', 'DecisionAN', 'DecisionCNKKAS', 'DecisionCNKAS']
+}
 const_type_of_legal_proceedings = [
     'Административное', 'Гражданское', 'Об административных правонарушениях',
     'Производство по материалам', 'Уголовное'
 ]
 const_type_of_legal_proceedings_sort = {
-    'Административное': ['DecisionKAS', 'DecisionTextsKAS', 'CaseListKAS'], 'Гражданское': ['DecisionCS', 'DecisionTextsСS', 'CaseListCS'], 'Об административных правонарушениях': ['DecisionAS', 'DecisionTextsAS', 'CaseListAS'],
-    'Производство по материалам': ['', '', ''], 'Уголовное': ['DecisionUS', 'DecisionTextsUS', 'CaseListUS']
+    'Административное': ['DecisionKAS', 'DecisionTextsKAS', 'CaseListKAS', 'DecisionCAKAS', ],  # 'DecisionCNKKAS', 'DecisionCNKAS'
+    'Гражданское': ['DecisionCS', 'DecisionTextsСS', 'CaseListCS', 'DecisionCA', ],  # 'DecisionCNK', 'DecisionCN'
+    'Об административных правонарушениях': ['DecisionAS', 'DecisionTextsAS', 'CaseListAS', 'DecisionDA', ],  # 'DecisionAN'
+    'Производство по материалам': ['', '', ''],
+    'Уголовное': ['DecisionUS', 'DecisionTextsUS', 'CaseListUS', 'DecisionUA', ]  # 'DecisionUNK', 'DecisionUN'
 }
 const_judges = [
     'Аджинджал Заур Сарапионович', 'Адлейба Лиа Ардонбеевна', 'Гамисония Генри Гришаевич', 'Кварчия Роман Владимирович',

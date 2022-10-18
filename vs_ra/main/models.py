@@ -10,6 +10,11 @@ class DataCase(models.Model):
     ArticleAC = models.CharField('Основная статья', max_length=100, default='', blank=True)
     ArticleCC = models.CharField('Статья', max_length=100, default='', blank=True)
     Judge = models.CharField('Судья', max_length=100, default='', blank=True)
+    PresidingJudge = models.CharField('Председательсвующий судья', max_length=100, default='', blank=True)
+    JudgeSpeaker = models.CharField('Судья докладчик', max_length=100, default='', blank=True)
+    ThirdJudge = models.CharField('Третий судья', max_length=100, default='', blank=True)
+    FourthJudge = models.CharField('Четвертый судья', max_length=100, default='', blank=True)
+    FifthJudge = models.CharField('Пятый судья', max_length=100, default='', blank=True)
     Victim = models.CharField('Потерпевший', max_length=100, default='', blank=True)
     AttractedPerson = models.CharField('Привлекаемое лицо', max_length=100, default='', blank=True)
     StateName = models.CharField('Текущее состояние', max_length=200, default='', blank=True)
@@ -27,4 +32,3 @@ class DataCase(models.Model):
     class Meta:
         verbose_name = "Дело"
         verbose_name_plural = "Дела"
-
