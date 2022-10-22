@@ -6,6 +6,8 @@ from rest_framework.decorators import api_view
 @api_view(['GET'])
 def getData(request):
     person = {'name': f'ABA'}
-    for key in request.GET:
-        person[key] = request.GET[key]
+    try:
+        person['result'] = str(int(request.GET['cost']) * 2)
+    except:
+        person['result'] = 'hmmm'
     return Response(person)
