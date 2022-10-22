@@ -1,10 +1,8 @@
 from decimal import Decimal
-
 import requests
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-
 
 
 headers = {
@@ -23,13 +21,16 @@ headers = {
     'Accept-Encoding': 'gzip, deflate',
     'User-Agent': 'okhttp/4.9.0'
 }
+http_proxy = 'http://0yzO74:A0wcezJ9JU@95.182.124.84:3000'
 
 
 def get_cost(cost):
+    session = requests.session()
+    session.proxies = {'http': f"{http_proxy}", 'https': f'{http_proxy}'}
     asset = 'USDT'
     trade_type = 'BUY'
     payment = 'TinkoffNew'
-    response = requests.post(
+    response = session.post(
         url='https://www.binance.com/bapi/c2c/v2/friendly/c2c/adv/search',
         headers=headers,
         json={
@@ -49,7 +50,7 @@ def get_cost(cost):
     asset = 'USDT'
     trade_type = 'SELL'
     payment = 'KaspiBank'
-    response = requests.post(
+    response = session.post(
         url='https://www.binance.com/bapi/c2c/v2/friendly/c2c/adv/search',
         headers=headers,
         json={
@@ -67,7 +68,6 @@ def get_cost(cost):
         min_price_usdt = Decimal(order['adv']['minSingleTransQuantity'])
         if min_price_usdt <= price_usdt <= max_price_usdt:
             return str(round(Decimal(order['adv']['price']) * price_usdt, 2))
-    return 'Что-то пошло не так'
 
 
 @api_view(['GET'])
