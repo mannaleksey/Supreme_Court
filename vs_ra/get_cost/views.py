@@ -1,3 +1,5 @@
+import json
+import time
 from decimal import Decimal
 import requests
 from django.shortcuts import render
@@ -71,10 +73,26 @@ def get_cost(cost):
 
 
 @api_view(['GET'])
+def loadData(request):
+    data = {}
+    try:
+        # data['result'] = str(get_cost(request.GET['cost']))
+        time.sleep(5)
+        data['user_id'] = request.GET['user_id']
+        data['result'] = str(float(request.GET['cost']) * 7.44)
+        with open('db.json', 'w', encoding='utf-8') as file:
+            json.dump(data, file)
+    except:
+        data['result'] = '0'
+    return Response(data)
+
+
+@api_view(['GET'])
 def getData(request):
     data = {}
     try:
-        data['result'] = str(get_cost(request.GET['cost']))
+        with open('db.json', 'r', encoding='utf-8') as file:
+            data = json.load(file)
     except:
-        data['result'] = 'hmmm'
+        data['result'] = '0'
     return Response(data)
