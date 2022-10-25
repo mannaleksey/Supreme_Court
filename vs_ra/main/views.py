@@ -13,7 +13,8 @@ def detail(request):
     try:
         data_case = DataCase.objects.all()
         data_case = data_case.filter(ObjectID=request.GET['ObjectID'])
-        return render(request, 'main/detail.html', {'title': 'Детали по делу', 'data': data_case[0]})
+        print(data_case[0].StateHistory)
+        return render(request, 'main/detail.html', {'title': 'Детали по делу', 'data': data_case[0], 'html': data_case[0].StateHistory})
     except:
         return render(request, 'main/detail.html', {'title': 'Детали по делу', 'data': 'Bad'})
 
@@ -72,6 +73,8 @@ def search(request):
             if one_filter in list_keys:
                 # print(request.GET[one_filter])
                 if request.GET[one_filter]:
+                    if request.GET[one_filter].find('Не выбрано') != -1:
+                        continue
                     if one_filter == 'type_of_legal_proceeding':
                         if request.GET[one_filter] == 'Уголовное':
                             key_for_accused = True
@@ -98,24 +101,27 @@ def search(request):
                         temp_filter.add(Q(**{'Defendant__icontains': request.GET[one_filter]}), Q.OR)
                         data_case = data_case.filter(temp_filter)
                     elif one_filter == 'Instance':
-                        if 'Court' in list_keys:
-                            if 'Верховный суд' == request.GET['Court'] and request.GET[one_filter] != 'Надзорная':
-                                if 'type_of_legal_proceeding' in list_keys:
-                                    temp_filter = const_type_of_legal_proceedings_sort[request.GET['type_of_legal_proceeding']]
-                                    list_instance = []
-                                    for i in temp_filter:
-                                        if i in const_instances_short[request.GET[one_filter]]:
-                                            list_instance.append(i)
-                                else:
-                                    list_instance = const_instances_short[request.GET[one_filter]]
-                                temp_filter = Q(**{'type_of_legal_proceeding': list_instance[0]})
-                                for detail_instance in list_instance[1:]:
-                                    temp_filter.add(Q(**{'type_of_legal_proceeding': detail_instance}), Q.OR)
-                                data_case = data_case.filter(temp_filter)
+                        if request.GET[one_filter] == 'Первая' or request.GET[one_filter] == 'Кассационная':
+                            if request.GET[one_filter] == 'Кассационная':
+                                if 'Court' not in list_keys:
+                                    filters[f'Court'] = const_courts_short['Верховный суд']
+                            if 'type_of_legal_proceeding' in list_keys:
+                                temp_filter = const_type_of_legal_proceedings_sort[
+                                    request.GET['type_of_legal_proceeding']]
+                                list_instance = []
+                                for i in temp_filter:
+                                    if i in const_instances_short[request.GET[one_filter]]:
+                                        list_instance.append(i)
                             else:
-                                key_add_params = False
-                        else:
-                            key_add_params = False
+                                list_instance = const_instances_short[request.GET[one_filter]]
+                            temp_filter = Q(**{'type_of_legal_proceeding': list_instance[0]})
+                            for detail_instance in list_instance[1:]:
+                                temp_filter.add(Q(**{'type_of_legal_proceeding': detail_instance}), Q.OR)
+                            data_case = data_case.filter(temp_filter)
+                        if request.GET[one_filter] == 'Надзорная':
+                            if 'ObjectID' not in list_keys:
+                                filters[f'Court'] = '3yru3vyuuyv3r'
+                            pass
                     else:
                         filters[f'{one_filter}'] = request.GET[one_filter]
                     if key_add_params:
@@ -125,6 +131,8 @@ def search(request):
         data_for_default = {}
         for i in ['Court', 'Instance', 'type_of_legal_proceeding', 'ObjectID', 'Judge', 'Date', 'Name_people', 'Instance']:
             try:
+                if request.GET[i].find('Не выбрано') != -1:
+                    continue
                 data_for_default[i] = request.GET[i]
             except:
                 data_for_default[i] = ''
@@ -133,11 +141,11 @@ def search(request):
             params = params
         context = {
             "title": "Поиск по судебным делам",
-            "courts": [' '] + const_courts,
-            "instances": ['  '] + const_instances,
-            "type_of_legal_proceedings": ['   '] + const_type_of_legal_proceedings,
-            "judges": ['    '] + const_judges,
-            "years": ['     '] + const_years,
+            "courts": ['Не выбрано '] + const_courts,
+            "instances": ['Не выбрано  '] + const_instances,
+            "type_of_legal_proceedings": ['Не выбрано   '] + const_type_of_legal_proceedings,
+            "judges": ['Не выбрано    '] + const_judges,
+            "years": ['Не выбрано     '] + const_years,
             "page_obj": page_split(data_case, request),
             "params": params,
             "count_cases": len(data_case),

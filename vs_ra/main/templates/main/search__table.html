@@ -1,7 +1,7 @@
 <table class="custom_table">
     <thead>
         <tr>
-            <th>Номер заказа</th>
+            <th>Номер дела</th>
             <th>Стороны</th>
             <th>Текущее состояние</th>
             <th>Судья</th>
@@ -12,17 +12,17 @@
     <tbody>
         {% for data in page_obj %}
             <tr>
-                <td><a target="_blank" href="/detail?ObjectID={{ data.ObjectID }}">{{ data.StringNumber }}</a></td>
+                <td class="col1"><a target="_blank" href="/detail?ObjectID={{ data.ObjectID }}">{{ data.StringNumber }}</a></td>
                 {% if not data.Accused %}
-                    <td><b>Истец: </b>{{ data.Plaintiff }}<br><b>Ответчик: </b>{{ data.Defendant }}</td>
+                    <td class="col2"><b>Истец: <br></b>{{ data.Plaintiff }}<br><b>Ответчик: <br></b>{{ data.Defendant }}</td>
                 {% endif %}
                 {% if data.Accused %}
-                    <td><b>Обвиняемый: </b>{{ data.Accused }}</td>
+                    <td class="col2"><b>Обвиняемый: <br></b>{{ data.Accused }}</td>
                 {% endif %}
-                <td>{{ data.StateName }}</td>
-                <td>{{ data.Judge }}</td>
-                <td>{{ data.ArticleCC }}</td>
-                <td>{{ data.Category }}</td>
+                <td class="col3">{{ data.StateName }}</td>
+                <td class="col4">{{ data.Judge }}</td>
+                <td class="col5">{{ data.ArticleCC }}</td>
+                <td class="col6">{{ data.Category }}</td>
             </tr>
         {% endfor %}
     </tbody>

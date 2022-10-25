@@ -1,4 +1,4 @@
-{% extends 'main/base.html' %}
+{% extends 'main/base_State_History.html' %}
 
 {% block title %}
 {{ title }}
@@ -105,12 +105,6 @@
                 <div class="right">{{ data.Document }}</div>
             </div>
             {% endif %}
-            {% if data.StateHistory %}
-            <div class="row_card">
-                <div class="left">История дела</div>
-                <div class="right">{{ data.StateHistory }}</div>
-            </div>
-            {% endif %}
             {% if data.HearingsCase %}
             <div class="row_card">
                 <div class="left">Слушания по делу</div>
@@ -118,6 +112,14 @@
             </div>
             {% endif %}
         </div>
+
+        {% if data.StateHistory %}
+        <div class="StateHistory">
+            <div class="StateHistory__title">История дела</div>
+            <div class="StateHistory__table">{{ data.StateHistory|safe }}</div>
+        </div>
+        {% endif %}
+
         <div class="btn_div go_back">
         <input type="submit" class="btn" onclick="history.back() || $.searchForm.goBack('/mgs/services/cases/appeal-civil?courtInternalName=mgs'); return false;" value="Вернуться к списку"/>
         </div>
