@@ -17,6 +17,6 @@ def getData(request):
             source_course = get_course('BUY', request.GET['source'])
         if 'dest' in keys_list:
             dest_course = get_course('SELL', request.GET['dest'])
-        print(source_course, dest_course)
-        data['result'] = str(round(Decimal(request.GET['price']) / source_course * dest_course, 2))
+        if source_course and dest_course:
+            data['result'] = str(round(Decimal(request.GET['price']) / source_course * dest_course, 2))
     return Response(data)

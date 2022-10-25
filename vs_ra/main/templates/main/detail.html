@@ -105,18 +105,19 @@
                 <div class="right">{{ data.Document }}</div>
             </div>
             {% endif %}
-            {% if data.HearingsCase %}
-            <div class="row_card">
-                <div class="left">Слушания по делу</div>
-                <div class="right">{{ data.HearingsCase }}</div>
-            </div>
-            {% endif %}
         </div>
 
         {% if data.StateHistory %}
-        <div class="StateHistory">
-            <div class="StateHistory__title">История дела</div>
-            <div class="StateHistory__table">{{ data.StateHistory|safe }}</div>
+        <div class="StateHistory_HearingsCase">
+            <div class="StateHistory_HearingsCase__title">История дела</div>
+            <div class="StateHistory_HearingsCase__table">{{ data.StateHistory|safe }}</div>
+        </div>
+        {% endif %}
+
+        {% if data.HearingsCase %}
+        <div class="StateHistory_HearingsCase">
+            <div class="StateHistory_HearingsCase__title">Судебные заседания</div>
+            <div class="StateHistory_HearingsCase__table">{{ data.HearingsCase|safe }}</div>
         </div>
         {% endif %}
 

@@ -410,6 +410,9 @@ form {
 .wrapper-search-tables .col4 {
   width: 130px;
 }
+.wrapper-search-tables .col5 {
+  white-space: nowrap;
+}
 .wrapper-search-tables .col2 {
   width: 130px;
 }
