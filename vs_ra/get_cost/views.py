@@ -13,12 +13,15 @@ def getData(request):
     data = {}
     keys_list = list(request.GET.keys())
     if ('source' in keys_list) and ('dest' in keys_list) and ('price' in keys_list):
-        if 'source' in keys_list:
-            source_course = get_course('BUY', request.GET['source'])
-        if 'dest' in keys_list:
-            dest_course = get_course('SELL', request.GET['dest'])
-        if source_course and dest_course:
-            data['result'] = str(round(Decimal(request.GET['price']) / source_course * dest_course, 2))
+        try:
+            if 'source' in keys_list:
+                source_course = get_course('BUY', request.GET['source'])
+            if 'dest' in keys_list:
+                dest_course = get_course('SELL', request.GET['dest'])
+            if source_course and dest_course:
+                data['result'] = str(round(Decimal(request.GET['price']) / source_course * dest_course, 2))
+        except:
+            data['result'] = '0'
     else:
         data['result'] = '0'
     return Response(data)
