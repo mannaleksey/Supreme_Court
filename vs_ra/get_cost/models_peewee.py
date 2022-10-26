@@ -55,7 +55,8 @@ def get_course(trade_type, payment_name):
         ['SELL', 'PermataMe', '15594.00000']
     ]
     names_bank = {
-        'Сбер (RUB)': 'RosBankNew',
+        # 'Сбер (RUB)': 'RosBankNew',
+        'abc1': 'RosBankNew',
         'Тинькофф (RUB)': 'TinkoffNew',
         'QIWI (RUB)': 'QIWI',
         'Kaspi Bank (KZT)': 'KaspiBank',
@@ -64,7 +65,8 @@ def get_course(trade_type, payment_name):
         'TBC Bank (GEL)': 'TBCbank',
         ' Liberty Bank (GEL)': 'LIBERTYBANK',
         'UZCARD (UZS)': 'Uzcard',
-        'Индонезия (IDR)': 'PermataMe'
+        # 'Индонезия (IDR)': 'PermataMe'
+        'abc2': 'PermataMe'
     }
     payment = names_bank[payment_name]
     for i in data:
