@@ -19,4 +19,6 @@ def getData(request):
             dest_course = get_course('SELL', request.GET['dest'])
         if source_course and dest_course:
             data['result'] = str(round(Decimal(request.GET['price']) / source_course * dest_course, 2))
+    else:
+        data['result'] = '0'
     return Response(data)

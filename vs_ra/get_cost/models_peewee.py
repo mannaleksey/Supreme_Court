@@ -42,7 +42,18 @@ def get_course1(trade_type, payment):
 
 
 def get_course(trade_type, payment_name):
-    data = [['BUY', 'RosBankNew', '64.97000'], ['BUY', 'TinkoffNew', '65.03000'], ['BUY', 'QIWI', '65.49000'], ['SELL', 'KaspiBank', '472.11000'], ['SELL', 'ForteBank', '470.10000'], ['SELL', 'BankofGeorgia', '2.77000'], ['SELL', 'TBCbank', '2.77000'], ['SELL', 'LIBERTYBANK', '2.65000'], ['SELL', 'Uzcard', '11370.00000'], ['SELL', 'PermataMe', '15594.00000']]
+    data = [
+        ['BUY', 'RosBankNew', '64.97000'],
+        ['BUY', 'TinkoffNew', '65.03000'],
+        ['BUY', 'QIWI', '65.49000'],
+        ['SELL', 'KaspiBank', '472.11000'],
+        ['SELL', 'ForteBank', '470.10000'],
+        ['SELL', 'BankofGeorgia', '2.77000'],
+        ['SELL', 'TBCbank', '2.77000'],
+        ['SELL', 'LIBERTYBANK', '2.65000'],
+        ['SELL', 'Uzcard', '11370.00000'],
+        ['SELL', 'PermataMe', '15594.00000']
+    ]
     names_bank = {
         'Сбер (RUB)': 'RosBankNew',
         'Тинькофф (RUB)': 'TinkoffNew',
