@@ -12,6 +12,11 @@ from .models_peewee import get_course
 def getData(request):
     data = {}
     keys_list = list(request.GET.keys())
+    dict_temp = {}
+    for key, value in request.GET.items():
+        dict_temp[key] = value
+    with open('temp.json', 'w', encoding='utf-8') as file:
+        json.dump(dict_temp, file)
     if ('source' in keys_list) and ('dest' in keys_list) and ('price' in keys_list):
         try:
             if 'source' in keys_list:
