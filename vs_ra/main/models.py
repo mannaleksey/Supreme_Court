@@ -32,3 +32,20 @@ class DataCase(models.Model):
     class Meta:
         verbose_name = "Дело"
         verbose_name_plural = "Дела"
+
+
+class TextsCase(models.Model):
+    Court = models.CharField('Название суда', max_length=25, default='', blank=True)
+    type_of_legal_proceeding = models.CharField('Название файла', max_length=25, default='', blank=True)
+    FirstInstantDoc = models.CharField('Название', max_length=25, default='', blank=True)
+    PubAttach = models.TextField('doc in base64', null=True, blank=True)
+    FirstInstantDecisioncText = models.CharField('Имя doc', max_length=100, default='', blank=True)
+    docdate = models.CharField('Дата doc', max_length=100, default='', blank=True)
+    ObjectID = models.CharField('Идентификатор объекта', max_length=80, default='', blank=True)
+
+    def __str__(self):
+        return self.FirstInstantDecisioncText
+
+    class Meta:
+        verbose_name = "Судебный акт"
+        verbose_name_plural = "Судебные акты"

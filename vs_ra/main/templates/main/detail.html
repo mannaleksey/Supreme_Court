@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+
 <div class="container">
     <div class="content--header_text">
     <h4>Информация по делу № {{ data.StringNumber }}</h4>
@@ -120,6 +121,33 @@
             <div class="StateHistory_HearingsCase__table">{{ data.HearingsCase|safe }}</div>
         </div>
         {% endif %}
+        {% if docx_base64 and name_on_site and name_doc and date_doc%}
+        <div class="StateHistory_HearingsCase">
+            <div class="StateHistory_HearingsCase__title">Судебные акты</div>
+            <div class="StateHistory_HearingsCase__table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Дата документа</th>
+                            <th>Вид документа</th>
+                            <th>Текст документа</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ date_doc }}</td>
+                            <td>{{ name_on_site }}</td>
+                            <td>
+                                <a download="{{ name_doc }}" href="data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,{{ docx_base64 }}">Скачать файл</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        {% endif %}
+
 
         <div class="btn_div go_back">
         <input type="submit" class="btn" onclick="history.back() || $.searchForm.goBack('/mgs/services/cases/appeal-civil?courtInternalName=mgs'); return false;" value="Вернуться к списку"/>

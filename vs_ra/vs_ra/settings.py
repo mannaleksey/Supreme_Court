@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
-    'get_cost',
-    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -138,6 +136,6 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_BEAT_SCHEDULE = {
     'db_task': {
         'task': 'main.tasks.refresh_db',
-        'schedule': 240.0,
+        'schedule': 120.0,
     }
 }
