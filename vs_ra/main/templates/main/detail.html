@@ -20,53 +20,51 @@
             {% endif %}
             {% if data.StringNumber %}
                 <div class="row_card">
-                    <div class="left">Номер</div>
+                    <div class="left">Номер дела</div>
                     <div class="right">{{ data.StringNumber }}</div>
                 </div>
             {% endif %}
-            {% if data.Plaintiff or data.Defendant or data.Accused %}
-                <div class="row_card">
-                    <div class="left">Стороны</div>
-                    <div class="right">
-                        {% if data.Plaintiff %}
-                            <b>Истец: </b>{{ data.Plaintiff }}<br>
-                        {% endif %}
-                        {% if data.Defendant %}
-                            <b>Ответчик: </b>{{ data.Defendant }}
-                        {% endif %}
-                        {% if data.Accused %}
-                            <b>Обвиняемый: </b>{{ data.Accused }}
-                        {% endif %}
-                    </div>
-                </div>
-            {% endif %}
+<!--            {% if data.Plaintiff or data.Defendant or data.Accused %}-->
+<!--                <div class="row_card">-->
+<!--                    <div class="left">Стороны</div>-->
+<!--                    <div class="right">-->
+<!--                        {% if data.Plaintiff %}-->
+<!--                            <b>Истец: </b>{{ data.Plaintiff }}<br>-->
+<!--                        {% endif %}-->
+<!--                        {% if data.Defendant %}-->
+<!--                            <b>Ответчик: </b>{{ data.Defendant }}-->
+<!--                        {% endif %}-->
+<!--                        {% if data.Accused %}-->
+<!--                            <b>Обвиняемый: </b>{{ data.Accused }}-->
+<!--                        {% endif %}-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            {% endif %}-->
             {% if data.Date %}
                 <div class="row_card">
-                    <div class="left">Дата</div>
+                    <div class="left">Дата регистрации</div>
                     <div class="right">{{ data.Date }}</div>
                 </div>
             {% endif %}
-            {% if data.Category %}
-                <div class="row_card">
-                    <div class="left">Категория дела</div>
-                    <div class="right">{{ data.Category }}</div>
-                </div>
-            {% endif %}
-            {% if data.StateName %}
-            <div class="row_card">
-                <div class="left">Текущее состояние</div>
-                <div class="right">{{ data.StateName }}</div>
-            </div>
-            {% endif %}
-            {% if data.ArticleCC %}
-            <div class="row_card">
-                <div class="left">Статья</div>
-                <div class="right">{{ data.ArticleCC }}</div>
-            </div>
-            {% endif %}
+<!--            {% if data.Category %}-->
+<!--                <div class="row_card">-->
+<!--                    <div class="left">Категория дела</div>-->
+<!--                    <div class="right">{{ data.Category }}</div>-->
+<!--                </div>-->
+<!--            {% endif %}-->
+<!--            {% if data.ArticleCC %}-->
+<!--            <div class="row_card">-->
+<!--                <div class="left">Статья</div>-->
+<!--                <div class="right">{{ data.ArticleCC }}</div>-->
+<!--            </div>-->
+<!--            {% endif %}-->
             {% if data.Judge %}
             <div class="row_card">
-                <div class="left">Судья</div>
+                {% if key_judges %}
+                    <div class="left">Судебный состав</div>
+                {% else %}
+                    <div class="left">Судья</div>
+                {% endif %}
                 <div class="right">{{ data.Judge }}</div>
             </div>
             {% endif %}
@@ -100,25 +98,31 @@
                 <div class="right">{{ data.FifthJudge }}</div>
             </div>
             {% endif %}
-            {% if data.Document %}
+<!--            {% if data.Document %}-->
+<!--            <div class="row_card">-->
+<!--                <div class="left">Судебный акт</div>-->
+<!--                <div class="right">{{ data.Document }}</div>-->
+<!--            </div>-->
+<!--            {% endif %}-->
+            {% if data.StateName %}
             <div class="row_card">
-                <div class="left">Судебный акт</div>
-                <div class="right">{{ data.Document }}</div>
+                <div class="left">Текущее состояние</div>
+                <div class="right">{{ data.StateName }}</div>
             </div>
             {% endif %}
         </div>
 
-        {% if data.StateHistory %}
+        {% if table_1 %}
         <div class="StateHistory_HearingsCase">
             <div class="StateHistory_HearingsCase__title">История дела</div>
-            <div class="StateHistory_HearingsCase__table">{{ data.StateHistory|safe }}</div>
+            <div class="StateHistory_HearingsCase__table">{{ table_1|safe }}</div>
         </div>
         {% endif %}
 
-        {% if data.HearingsCase %}
+        {% if table_2 %}
         <div class="StateHistory_HearingsCase">
             <div class="StateHistory_HearingsCase__title">Судебные заседания</div>
-            <div class="StateHistory_HearingsCase__table">{{ data.HearingsCase|safe }}</div>
+            <div class="StateHistory_HearingsCase__table">{{ table_2|safe }}</div>
         </div>
         {% endif %}
         {% if docx_base64 and name_on_site and name_doc and date_doc%}
@@ -147,7 +151,6 @@
         </div>
 
         {% endif %}
-
 
         <div class="btn_div go_back">
         <input type="submit" class="btn" onclick="history.back() || $.searchForm.goBack('/mgs/services/cases/appeal-civil?courtInternalName=mgs'); return false;" value="Вернуться к списку"/>
