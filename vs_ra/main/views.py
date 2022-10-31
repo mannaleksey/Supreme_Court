@@ -43,14 +43,18 @@ def detail(request):
                 key_judges = True
         except:
             pass
+        table_1 = ''
+        table_2 = ''
         try:
-            table_1 = data_case[0].StateHistory[:6] + ' id="table_1"' + data_case[0].StateHistory[6:]
+            if data_case[0].StateHistory:
+                table_1 = data_case[0].StateHistory[:6] + ' id="table_1"' + data_case[0].StateHistory[6:]
         except:
-            table_1 = ''
+            pass
         try:
-            table_2 = data_case[0].HearingsCase[:6] + ' id="table_2"' + data_case[0].HearingsCase[6:]
+            if data_case[0].HearingsCase:
+                table_2 = data_case[0].HearingsCase[:6] + ' id="table_2"' + data_case[0].HearingsCase[6:]
         except:
-            table_2 = ''
+            pass
         return render(request, 'main/detail.html', {
             'title': 'Детали по делу',
             'data': data_case[0],
