@@ -24,40 +24,60 @@
                     <div class="right">{{ data.StringNumber }}</div>
                 </div>
             {% endif %}
-<!--            {% if data.Plaintiff or data.Defendant or data.Accused %}-->
-<!--                <div class="row_card">-->
-<!--                    <div class="left">Стороны</div>-->
-<!--                    <div class="right">-->
-<!--                        {% if data.Plaintiff %}-->
-<!--                            <b>Истец: </b>{{ data.Plaintiff }}<br>-->
-<!--                        {% endif %}-->
-<!--                        {% if data.Defendant %}-->
-<!--                            <b>Ответчик: </b>{{ data.Defendant }}-->
-<!--                        {% endif %}-->
-<!--                        {% if data.Accused %}-->
-<!--                            <b>Обвиняемый: </b>{{ data.Accused }}-->
-<!--                        {% endif %}-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            {% endif %}-->
+
+
+            {% if data.Victim or data.Accused or data.Plaintiff or data.Defendant or data.AttractedPerson %}
+                <div class="row_card">
+                    <div class="left">Стороны</div>
+                    <div class="right">
+                {% with 'DecisionUS CaseListUS DecisionUA DecisionUNK DecisionUN' as list %}
+                    {% if data.type_of_legal_proceeding in list.split %}
+                        {% if data.Accused %}
+                            <b>Обвиняемый: </b>{{ data.Accused }}
+                        {% else %}
+                            {% if data.Defendant %}
+                                <b>Обвиняемый: </b>{{ data.Defendant }}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endwith %}
+                {% with 'DecisionAS CaseListAS DecisionDA DecisionAN' as list %}
+                    {% if data.type_of_legal_proceeding in list.split %}
+                        {% if data.Accused %}
+                            <b>Привлекаемое лицо: </b>{{ data.Accused }}
+                        {% else %}
+                            {% if data.AttractedPerson %}
+                                <b>Привлекаемое лицо: </b>{{ data.AttractedPerson }}
+                            {% else %}
+                                {% if data.Defendant %}
+                                    <b>Привлекаемое лицо: </b>{{ data.Defendant }}
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endwith %}
+                {% with 'DecisionAS CaseListAS DecisionDA DecisionAN DecisionUS CaseListUS DecisionUA DecisionUNK DecisionUN' as list %}
+                    {% if data.type_of_legal_proceeding not in list.split %}
+                        {% if data.Plaintiff or data.Defendant %}
+                            <b>Истец: </b>{{ data.Plaintiff }}<br><b>Ответчик: </b>{{ data.Defendant }}
+                        {% else %}
+                            {% if data.Victim or data.Accused %}
+                                <b>Истец: </b>{{ data.Victim }}<br><b>Ответчик: </b>{{ data.Accused }}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endwith %}
+                </div>
+                </div>
+            {% endif %}
+
+
             {% if data.Date %}
                 <div class="row_card">
                     <div class="left">Дата регистрации</div>
                     <div class="right">{{ data.Date }}</div>
                 </div>
             {% endif %}
-<!--            {% if data.Category %}-->
-<!--                <div class="row_card">-->
-<!--                    <div class="left">Категория дела</div>-->
-<!--                    <div class="right">{{ data.Category }}</div>-->
-<!--                </div>-->
-<!--            {% endif %}-->
-<!--            {% if data.ArticleCC %}-->
-<!--            <div class="row_card">-->
-<!--                <div class="left">Статья</div>-->
-<!--                <div class="right">{{ data.ArticleCC }}</div>-->
-<!--            </div>-->
-<!--            {% endif %}-->
             {% if data.Judge %}
             <div class="row_card">
                 {% if key_judges %}
@@ -98,6 +118,43 @@
                 <div class="right">{{ data.FifthJudge }}</div>
             </div>
             {% endif %}
+
+            {% if data.Category %}
+                <div class="row_card">
+                    <div class="left">Категория дела</div>
+                    <div class="right">{{ data.Category }}</div>
+                </div>
+            {% endif %}
+            {% if data.ArticleCC or data.ArticleAC %}
+                <div class="row_card">
+
+                    {% with 'DecisionUS CaseListUS DecisionUA DecisionUNK DecisionUN' as list %}
+                        {% if data.type_of_legal_proceeding in list.split %}
+                            <div class="left">Статья УК РА</div>
+                        {% endif %}
+                    {% endwith %}
+                    {% with 'DecisionAS CaseListAS DecisionDA DecisionAN' as list %}
+                        {% if data.type_of_legal_proceeding in list.split %}
+                            <div class="left">Статья КоАП РА</div>
+                        {% endif %}
+                    {% endwith %}
+                    {% with 'DecisionUS CaseListUS DecisionUA DecisionUNK DecisionUN DecisionAS CaseListAS DecisionDA DecisionAN' as list %}
+                        {% if data.type_of_legal_proceeding not in list.split %}
+                            <div class="left">Статья</div>
+                        {% endif %}
+                    {% endwith %}
+                    {% if data.ArticleCC %}
+                        <div class="right">{{ data.ArticleCC }}</div>
+                    {% else %}
+                        {% if data.ArticleAC %}
+                            <div class="right">{{ data.ArticleAC }}</div>
+                        {% else %}
+                            <div class="right"></div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            {% endif %}
+
 <!--            {% if data.Document %}-->
 <!--            <div class="row_card">-->
 <!--                <div class="left">Судебный акт</div>-->

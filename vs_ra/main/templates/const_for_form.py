@@ -19,11 +19,11 @@ const_type_of_legal_proceedings = [
     'Производство по материалам', 'Уголовное'
 ]
 const_type_of_legal_proceedings_sort = {
-    'Административное': ['DecisionKAS', 'DecisionTextsKAS', 'CaseListKAS', 'DecisionCAKAS', ],  # 'DecisionCNKKAS', 'DecisionCNKAS'
-    'Гражданское': ['DecisionCS', 'DecisionTextsСS', 'CaseListCS', 'DecisionCA', ],  # 'DecisionCNK', 'DecisionCN'
-    'Об административных правонарушениях': ['DecisionAS', 'DecisionTextsAS', 'CaseListAS', 'DecisionDA', ],  # 'DecisionAN'
+    'Административное': ['DecisionKAS', 'CaseListKAS', 'DecisionCAKAS', ],  # 'DecisionCNKKAS', 'DecisionCNKAS'
+    'Гражданское': ['DecisionCS', 'CaseListCS', 'DecisionCA', ],  # 'DecisionCNK', 'DecisionCN'
+    'Об административных правонарушениях': ['DecisionAS',  'CaseListAS', 'DecisionDA', ],  # 'DecisionAN'
     'Производство по материалам': ['', '', ''],
-    'Уголовное': ['DecisionUS', 'DecisionTextsUS', 'CaseListUS', 'DecisionUA', ]  # 'DecisionUNK', 'DecisionUN'
+    'Уголовное': ['DecisionUS', 'CaseListUS', 'DecisionUA', ]  # 'DecisionUNK', 'DecisionUN'
 }
 const_judges = [
     'Аджинджал Заур Сарапионович', 'Адлейба Лиа Ардонбеевна', 'Гамисония Генри Гришаевич', 'Кварчия Роман Владимирович',
@@ -37,7 +37,7 @@ const_judges = [
     'Чанба Мадина Витальевна', 'Степанов Александр Геннадиевич', 'Язычба Кристина Романовна', 'Агумава Игорь Валерянович',
     'Ануа Марина Спиридоновна', 'Сангулия Эруланд Юрьевич', 'Дочия Ирма Зауровна', 'Зантария Валерий Кезбеевич',
     'Харчилава Фатима Джумковна', 'Ажиба Виктория Рудольфовна', 'Хашба Анатолий Кишвардович', 'Бжания Беслан Шалодиевич',
-    'Ласурия Кама Нуриевна'
+    'Ласурия Кама Нуриевна', 'Бутба Саида Рушниевна', 'Миканба Сафар Тарасович', 'Касландзия Ада Алексеевна'
 ]
 const_years = ['2020', '2021', '2022']
 

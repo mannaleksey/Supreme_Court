@@ -408,13 +408,13 @@ form {
   text-align: center;
 }
 .wrapper-search-tables .col4 {
-  width: 130px;
+  width: 150px;
 }
 .wrapper-search-tables .col5 {
   white-space: nowrap;
 }
 .wrapper-search-tables .col2 {
-  width: 130px;
+  width: 150px;
 }
 .wrapper-search-tables .custom_table {
   max-width: 99%;
@@ -449,6 +449,9 @@ form {
 }
 .wrapper-search-tables .custom_table tr:nth-child(even) {
   background-color: #e4eaef;
+}
+.wrapper-search-tables .custom_table tr {
+  height: 50px;
 }
 .content_details {
   padding: 15px 40px;

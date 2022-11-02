@@ -17,7 +17,7 @@ def detail(request):
     try:
         data_case = DataCase.objects.all()
         data_case_texts = TextsCase.objects.all()
-        data_case = data_case.filter(ObjectID=request.GET['ObjectID'])
+        data_case = data_case.filter(ObjectID=request.GET['ObjectID'], type_of_legal_proceeding=request.GET['type_of_legal_proceeding'])
         docx_base64 = ''
         name_on_site = ''
         name_doc = ''
@@ -159,7 +159,11 @@ def search(request):
                         filters[f'{one_filter}'] = const_courts_short[request.GET[one_filter]]
                     elif one_filter == 'Judge':
                         full_name = sort_full_name(request, one_filter)
-                        filters[f'{one_filter}__icontains'] = full_name
+                        # filters[f'{one_filter}__icontains'] = full_name
+                        temp_filter = Q(**{f'{one_filter}__icontains': full_name})
+                        for name_judge in ['PresidingJudge', 'JudgeSpeaker', 'ThirdJudge', 'FourthJudge', 'FifthJudge']:
+                            temp_filter.add(Q(**{f'{name_judge}__icontains': full_name}), Q.OR)
+                        data_case = data_case.filter(temp_filter)
                     elif one_filter == 'Name_people':
                         temp_filter = Q(**{'Plaintiff__icontains': request.GET[one_filter]})
                         temp_filter.add(Q(**{'Defendant__icontains': request.GET[one_filter]}), Q.OR)
