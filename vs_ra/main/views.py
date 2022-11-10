@@ -25,7 +25,10 @@ def detail(request):
         try:
             type_of_legal_proceeding = data_case[0].type_of_legal_proceeding
             if type_of_legal_proceeding.find('Decision') != -1:
-                type_of_legal_proceeding = type_of_legal_proceeding[:8] + 'Texts' + type_of_legal_proceeding[8:]
+                end_str = type_of_legal_proceeding[8:]
+                if end_str == 'KAS':
+                    end_str += 'CS'
+                type_of_legal_proceeding = type_of_legal_proceeding[:8] + 'Texts' + end_str
                 print(type_of_legal_proceeding)
                 data_case_texts = data_case_texts.filter(ObjectID=request.GET['ObjectID'], type_of_legal_proceeding=type_of_legal_proceeding)
                 for one_data_case_texts in data_case_texts:
@@ -77,15 +80,6 @@ def page_split(data, request):
     return page_obj
 
 
-def set_func(name):
-    data_case = DataCase.objects.all()
-    data = []
-    for i in data_case.all().values(f"{name}"):
-        if i[f"{name}"] not in data:
-            data.append(i[f"{name}"])
-    return data
-
-
 def sort_full_name(request, one_filter):
     try:
         full_name = request.GET[one_filter].split()[0]
@@ -101,7 +95,12 @@ def sort_full_name(request, one_filter):
 
 def search(request):
     # print(request.GET['Court'])
-    data_case = DataCase.objects.all()
+    while True:
+        try:
+            data_case = DataCase.objects.all()
+            break
+        except:
+            pass
     # data_case2 = TextsCase.objects.all()
     # a = []
     # for i in data_case2:
@@ -115,7 +114,6 @@ def search(request):
     params = ''
     if request.method == "GET":
         list_keys = list(request.GET.keys())
-        print(list_keys)
         for i in reversed(list_keys):
             print(request.GET[i])
             if request.GET[i].find('Не выбрано') != -1:
@@ -124,14 +122,14 @@ def search(request):
         if 'Date' in list_keys:
             filters['Date__year'] = request.GET['Date']
             params += f'&Date={request.GET["Date"]}'
-        if ('type_of_legal_proceeding' not in list_keys) and ('ObjectID' not in list_keys):
-            detail_filters = const_type_of_legal_proceedings_sort['Административное']
-            temp_filter = Q(**{'type_of_legal_proceeding': detail_filters[0]})
-            for i in const_type_of_legal_proceedings_sort:
-                for detail_filter in const_type_of_legal_proceedings_sort[i]:
-                    temp_filter.add(Q(**{'type_of_legal_proceeding': detail_filter}), Q.OR)
-            data_case = data_case.filter(temp_filter)
-            pass
+        # if ('type_of_legal_proceeding' not in list_keys) and ('ObjectID' not in list_keys):
+        #     detail_filters = const_type_of_legal_proceedings_sort['Административное']
+        #     temp_filter = Q(**{'type_of_legal_proceeding': detail_filters[0]})
+        #     for i in const_type_of_legal_proceedings_sort:
+        #         for detail_filter in const_type_of_legal_proceedings_sort[i]:
+        #             temp_filter.add(Q(**{'type_of_legal_proceeding': detail_filter}), Q.OR)
+        #     data_case = data_case.filter(temp_filter)
+        #     pass
         for one_filter in ['ObjectID', 'Court', 'type_of_legal_proceeding', 'Judge', 'Name_people', 'Instance']:
             key_add_params = True
             if one_filter in list_keys:
@@ -150,11 +148,20 @@ def search(request):
                         except:
                             key_type_of_legal_proceeding = True
                         if key_type_of_legal_proceeding:
-                            detail_filters = const_type_of_legal_proceedings_sort[request.GET[one_filter]]
-                            temp_filter = Q(**{one_filter: detail_filters[0]})
-                            for detail_filter in detail_filters[1:]:
-                                temp_filter.add(Q(**{one_filter: detail_filter}), Q.OR)
-                            data_case = data_case.filter(temp_filter)
+                            detail_filters = const_type_of_legal_proceedings_sort[request.GET[one_filter]].copy()
+                            if 'DecisionKAS' in detail_filters:
+                                temp_filter = Q(**{'StringNumber__startswith': '02а-'})
+                                detail_filters.remove('DecisionKAS')
+                            elif 'DecisionCS' in detail_filters:
+                                temp_filter = Q(**{'StringNumber__startswith': '02-'})
+                                detail_filters.remove('DecisionCS')
+                            else:
+                                temp_filter = Q(**{one_filter: detail_filters[0]})
+                                detail_filters.pop(0)
+                            if detail_filters:
+                                for detail_filter in detail_filters:
+                                    temp_filter.add(Q(**{one_filter: detail_filter}), Q.OR)
+                                data_case = data_case.filter(temp_filter)
                     elif one_filter == 'Court':
                         filters[f'{one_filter}'] = const_courts_short[request.GET[one_filter]]
                     elif one_filter == 'Judge':
@@ -169,27 +176,38 @@ def search(request):
                         temp_filter.add(Q(**{'Defendant__icontains': request.GET[one_filter]}), Q.OR)
                         data_case = data_case.filter(temp_filter)
                     elif one_filter == 'Instance':
-                        if request.GET[one_filter] == 'Первая' or request.GET[one_filter] == 'Кассационная':
-                            if request.GET[one_filter] == 'Кассационная':
+                        if request.GET[one_filter] == 'Первая' or request.GET[one_filter] == 'Кассационная' or request.GET[one_filter] == 'Надзорная':
+                            if request.GET[one_filter] == 'Кассационная' or request.GET[one_filter] == 'Надзорная':
                                 if 'Court' not in list_keys:
                                     filters[f'Court'] = const_courts_short['Верховный суд']
                             if 'type_of_legal_proceeding' in list_keys:
-                                temp_filter = const_type_of_legal_proceedings_sort[
-                                    request.GET['type_of_legal_proceeding']]
+                                temp_filter = const_type_of_legal_proceedings_sort[request.GET['type_of_legal_proceeding']]
                                 list_instance = []
                                 for i in temp_filter:
                                     if i in const_instances_short[request.GET[one_filter]]:
                                         list_instance.append(i)
                             else:
-                                list_instance = const_instances_short[request.GET[one_filter]]
-                            temp_filter = Q(**{'type_of_legal_proceeding': list_instance[0]})
-                            for detail_instance in list_instance[1:]:
-                                temp_filter.add(Q(**{'type_of_legal_proceeding': detail_instance}), Q.OR)
-                            data_case = data_case.filter(temp_filter)
-                        if request.GET[one_filter] == 'Надзорная':
-                            if 'ObjectID' not in list_keys:
-                                filters[f'Court'] = '3yru3vyuuyv3r'
-                            pass
+                                list_instance = const_instances_short[request.GET[one_filter]].copy()
+                            if list_instance:
+                                if 'DecisionKAS' in list_instance:
+                                    temp_filter = Q(**{'StringNumber__startswith': '02а-'})
+                                    list_instance.remove('DecisionKAS')
+                                    if not list_instance:
+                                        data_case = data_case.filter(temp_filter)
+                                elif 'DecisionCS' in list_instance:
+                                    temp_filter = Q(**{'StringNumber__startswith': '02-'})
+                                    list_instance.remove('DecisionCS')
+                                    if not list_instance:
+                                        data_case = data_case.filter(temp_filter)
+                                elif list_instance:
+                                    temp_filter = Q(**{'type_of_legal_proceeding': list_instance[0]})
+                                    list_instance.pop(0)
+                                    if not list_instance:
+                                        data_case = data_case.filter(temp_filter)
+                                if list_instance:
+                                    for detail_instance in list_instance:
+                                        temp_filter.add(Q(**{'type_of_legal_proceeding': detail_instance}), Q.OR)
+                                    data_case = data_case.filter(temp_filter)
                     elif one_filter == 'ObjectID':
                         temp_filter = Q(**{'ObjectID': request.GET[one_filter]})
                         temp_filter.add(Q(**{'StringNumber__startswith': request.GET[one_filter]}), Q.OR)
@@ -224,3 +242,4 @@ def search(request):
             "data_for_default": data_for_default,
         }
         return render(request, 'main/search.html', context)
+

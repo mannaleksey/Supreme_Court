@@ -19,11 +19,11 @@ const_type_of_legal_proceedings = [
     'Производство по материалам', 'Уголовное'
 ]
 const_type_of_legal_proceedings_sort = {
-    'Административное': ['DecisionKAS', 'CaseListKAS', 'DecisionCAKAS', ],  # 'DecisionCNKKAS', 'DecisionCNKAS'
-    'Гражданское': ['DecisionCS', 'CaseListCS', 'DecisionCA', ],  # 'DecisionCNK', 'DecisionCN'
-    'Об административных правонарушениях': ['DecisionAS',  'CaseListAS', 'DecisionDA', ],  # 'DecisionAN'
+    'Административное': ['DecisionKAS', 'CaseListKAS', 'DecisionCAKAS', 'DecisionCNKKAS', 'DecisionCNKAS'],  # 'DecisionCNKKAS', 'DecisionCNKAS'
+    'Гражданское': ['DecisionCS', 'CaseListCS', 'DecisionCA', 'DecisionCNK', 'DecisionCN'],  # 'DecisionCNK', 'DecisionCN'
+    'Об административных правонарушениях': ['DecisionAS',  'CaseListAS', 'DecisionDA', 'DecisionAN'],  # 'DecisionAN'
     'Производство по материалам': ['', '', ''],
-    'Уголовное': ['DecisionUS', 'CaseListUS', 'DecisionUA', ]  # 'DecisionUNK', 'DecisionUN'
+    'Уголовное': ['DecisionUS', 'CaseListUS', 'DecisionUA', 'DecisionUNK', 'DecisionUN']  # 'DecisionUNK', 'DecisionUN'
 }
 const_judges = [
     'Аджинджал Заур Сарапионович', 'Адлейба Лиа Ардонбеевна', 'Гамисония Генри Гришаевич', 'Кварчия Роман Владимирович',

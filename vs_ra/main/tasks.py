@@ -8,12 +8,15 @@ from .temp import main
 
 @shared_task
 def refresh_db():
-    # try:
-        DataCase.objects.all().delete()
-        TextsCase.objects.all().delete()
-        print('All removed')
-        main()
-        print('Nice')
-    # except:
-    #     time.sleep(5)
-    #     pass
+    print('start')
+    while True:
+        try:
+            DataCase.objects.all().delete()
+            TextsCase.objects.all().delete()
+            break
+        except:
+            time.sleep(5)
+            pass
+    print('All removed')
+    main()
+    print('Nice')
