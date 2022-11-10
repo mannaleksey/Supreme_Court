@@ -408,13 +408,17 @@ form {
   text-align: center;
 }
 .wrapper-search-tables .col4 {
-  width: 150px;
+  width: 180px;
 }
 .wrapper-search-tables .col5 {
   white-space: nowrap;
 }
 .wrapper-search-tables .col2 {
   width: 150px;
+}
+.wrapper-search-tables .col3 {
+  word-break: break-all;
+  max-width: 100px;
 }
 .wrapper-search-tables .custom_table {
   max-width: 99%;
