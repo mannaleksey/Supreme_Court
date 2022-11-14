@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from celery.schedules import crontab
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -31,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_crontab',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -127,15 +130,20 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# Celery
-CELERY_BROKER_URL = 'redis://localhost:6379'
+CRONJOBS = [
+    ('2 16 * * *', 'main.tasks.refresh_db')
+]
 
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
 
-CELERY_BEAT_SCHEDULE = {
-    'db_task': {
-        'task': 'main.tasks.refresh_db',
-        'schedule': 120.0,
-    }
-}
+# # Celery
+# CELERY_BROKER_URL = 'redis://localhost:6379'
+#
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_TASK_SERIALIZER = 'json'
+#
+# CELERY_BEAT_SCHEDULE = {
+#     'db_task': {
+#         'task': 'main.tasks.refresh_db',
+#         'schedule': crontab(hour=14, minute=34),
+#     }
+# }
