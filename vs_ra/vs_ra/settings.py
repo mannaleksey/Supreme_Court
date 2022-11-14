@@ -131,7 +131,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CRONJOBS = [
-    ('2 16 * * *', 'main.tasks.refresh_db')
+    ('8 17 * * *', 'main.tasks.refresh_db')
 ]
 
 
