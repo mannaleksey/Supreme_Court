@@ -6,11 +6,21 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from .models import DataCase, TextsCase
+from .tasks import refresh_db
 from .templates.const_for_form import const_courts, const_instances, const_type_of_legal_proceedings, const_judges, const_years, const_courts_short, const_type_of_legal_proceedings_sort, const_instances_short
 
 
 def index(request):
     return render(request, 'main/index.html', {'title': 'Главная страница', 'tasks': ['4']})
+
+
+def reload(request):
+    while True:
+        try:
+            refresh_db()
+            return render(request, 'main/db_success.html')
+        except:
+            pass
 
 
 def detail(request):
