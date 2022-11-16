@@ -3,13 +3,15 @@ import os
 import time
 import xml.etree.ElementTree as ET
 import gzip
-import shutil
-
 from .all_keys import keys, keys_texts
 from .models import DataCase, TextsCase
+import io
+# from vs_ra.main.all_keys import keys, keys_texts
 
 
 def get_file_ftp(court):
+    all_data = []
+    all_data_texts = []
     host = f'search.vs-ra.org'
     ftp_user = 'radpay2_search'
     ftp_password = 'fk^5gYan5hdu'
@@ -23,48 +25,52 @@ def get_file_ftp(court):
             file_list.remove('..')
             file_list.remove('.')
             for file in file_list:
-                with open(file, 'wb') as fp:  # Создаем локальный файл в режиме двоичной записи
-                    ftp.retrbinary('retr ' + file, fp.write)
+                c = 0
+                while True:
+                    if c == 10:
+                        break
+                    try:
+                        sio = io.BytesIO()
+
+                        def handle_binary(more_data):
+                            # print(more_data)
+                            sio.write(more_data)
+
+                        resp = ftp.retrbinary(f"retr {file}", callback=handle_binary)
+
+                        sio.seek(0)  # Go back to the start
+                        zippy = gzip.GzipFile(fileobj=sio)
+
+                        uncompressed = zippy.read()
+                        str_xml = ET.canonicalize(uncompressed)
+                        root = ET.fromstring(str_xml)
+                        root = root[0][2]
+                        for row in root:
+                            data = {'Court': court, 'type_of_legal_proceeding': file.split('.')[0]}
+                            for column in row:
+                                if column.tag == 'Column':
+                                    attrs = column.attrib
+                                    attrs_name = attrs['Name']
+                                    if attrs_name == 'pubattach':
+                                        attrs_name = 'PubAttach'
+                                    if file.split('.')[0].find('Texts') == -1:
+                                        keys_xml = keys
+                                    else:
+                                        keys_xml = keys_texts
+                                    if attrs_name in keys_xml:
+                                        data[attrs_name] = attrs['Value']
+                            if file.split('.')[0].find('Texts') == -1:
+                                all_data.append(DataCase(**data))
+                                # print(data)
+                            else:
+                                all_data_texts.append(TextsCase(**data))
+                                # print(data)
+                        break
+                    except:
+                        time.sleep(1)
+                        c += 1
+                        pass
             break
-    ftp.close()
-
-
-def unpack_rar():
-    list_rar_file = os.listdir()
-    for rar_file in list_rar_file:
-        if rar_file.find('.xml.gz') != -1:
-            with gzip.open(f'{rar_file}', 'rb') as f_in:
-                with open(f'{rar_file.split(".")[0]}.xml', 'wb') as f_out:
-                    shutil.copyfileobj(f_in, f_out)
-
-
-def read_xml(court):
-    all_data = []
-    all_data_texts = []
-    list_file = os.listdir()
-    for file in list_file:
-        if file.split('.')[-1] == 'xml':
-            tree = ET.parse(f'{file}')
-            root = tree.getroot()
-            root = root[0][2]
-            for row in root:
-                data = {'Court': court, 'type_of_legal_proceeding': file.split('.')[0]}
-                for column in row:
-                    if column.tag == 'Column':
-                        attrs = column.attrib
-                        attrs_name = attrs['Name']
-                        if attrs_name == 'pubattach':
-                            attrs_name = 'PubAttach'
-                        if file.split('.')[0].find('Texts') == -1:
-                            keys_xml = keys
-                        else:
-                            keys_xml = keys_texts
-                        if attrs_name in keys_xml:
-                            data[attrs_name] = attrs['Value']
-                if file.split('.')[0].find('Texts') == -1:
-                    all_data.append(DataCase(**data))
-                else:
-                    all_data_texts.append(TextsCase(**data))
     while True:
         try:
             if all_data:
@@ -74,17 +80,10 @@ def read_xml(court):
             break
         except:
             pass
-
-
-def del_xml_files():
-    list_rar_file = os.listdir()
-    for rar_file in list_rar_file:
-        if rar_file.find('.xml') != -1:
-            os.remove(rar_file)
+    ftp.close()
 
 
 def main():
-    del_xml_files()
     list_courts = ['ais', 'sgs', 'gagr', 'gud', 'srs', 'gul', 'och', 'tku', 'gal', 'voin']
     for court in list_courts:
         while True:
@@ -92,9 +91,9 @@ def main():
                 get_file_ftp(court)
                 break
             except:
-                del_xml_files()
-                time.sleep(1)
+                time.sleep(10)
                 print('bad connection ftp')
-        unpack_rar()
-        read_xml(court)
-        del_xml_files()
+
+
+if __name__ == '__main__':
+    main()

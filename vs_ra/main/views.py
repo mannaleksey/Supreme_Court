@@ -39,7 +39,6 @@ def detail(request):
                 if end_str == 'KAS':
                     end_str += 'CS'
                 type_of_legal_proceeding = type_of_legal_proceeding[:8] + 'Texts' + end_str
-                print(type_of_legal_proceeding)
                 data_case_texts = data_case_texts.filter(ObjectID=request.GET['ObjectID'], type_of_legal_proceeding=type_of_legal_proceeding)
                 for one_data_case_texts in data_case_texts:
                     if one_data_case_texts.PubAttach:
@@ -125,10 +124,8 @@ def search(request):
     if request.method == "GET":
         list_keys = list(request.GET.keys())
         for i in reversed(list_keys):
-            print(request.GET[i])
             if request.GET[i].find('Не выбрано') != -1:
                 list_keys.remove(i)
-        print(list_keys)
         if 'Date' in list_keys:
             filters['Date__year'] = request.GET['Date']
             params += f'&Date={request.GET["Date"]}'
