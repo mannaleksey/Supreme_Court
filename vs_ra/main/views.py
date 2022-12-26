@@ -1,8 +1,7 @@
 import datetime
 
 from django.core.paginator import Paginator
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.db.models import Q
 from .models import DataCase, TextsCase, HearingCase
 from .tasks import refresh_db, refresh_db_hearing
