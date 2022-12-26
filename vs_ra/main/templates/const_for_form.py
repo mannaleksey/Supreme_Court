@@ -14,6 +14,11 @@ const_instances_short = {
     'Кассационная': ['DecisionCA', 'DecisionCAKAS', 'DecisionDA', 'DecisionUA'],
     'Надзорная': ['DecisionUNK', 'DecisionUN', 'DecisionCNK', 'DecisionCN', 'DecisionAN', 'DecisionCNKKAS', 'DecisionCNKAS']
 }
+const_instances_short_hearing = {
+    'Первая': ['CaseListAS', 'CaseListCS', 'CaseListKAS', 'CaseListUS'],
+    'Кассационная': ['CaseListCA', 'CaseListCAKAS', 'CaseListUA', 'CaseListDA'],
+    'Надзорная': ['CaseListUN', 'CaseListCN', 'CaseListAN', 'CaseListCNKAS']
+}
 const_type_of_legal_proceedings = [
     'Административное', 'Гражданское', 'Об административных правонарушениях',
     'Производство по материалам', 'Уголовное'
@@ -24,6 +29,13 @@ const_type_of_legal_proceedings_sort = {
     'Об административных правонарушениях': ['DecisionAS',  'CaseListAS', 'DecisionDA', 'DecisionAN'],  # 'DecisionAN'
     'Производство по материалам': ['', '', ''],
     'Уголовное': ['DecisionUS', 'CaseListUS', 'DecisionUA', 'DecisionUNK', 'DecisionUN']  # 'DecisionUNK', 'DecisionUN'
+}
+const_type_of_legal_proceedings_sort_hearing = {
+    'Административное': ['CaseListKAS', 'CaseListCAKAS', 'CaseListCNKAS', ],
+    'Гражданское': ['CaseListCS', 'CaseListCA', 'CaseListCN', ],
+    'Об административных правонарушениях': ['CaseListAS', 'CaseListDA', 'CaseListAN', ],
+    'Производство по материалам': ['', '', ''],
+    'Уголовное': ['CaseListUS', 'CaseListUA', 'CaseListUN', ]
 }
 const_judges = [
     'Аджинджал Заур Сарапионович', 'Адлейба Лиа Ардонбеевна', 'Гамисония Генри Гришаевич', 'Кварчия Роман Владимирович',
@@ -40,5 +52,10 @@ const_judges = [
     'Ласурия Кама Нуриевна', 'Бутба Саида Рушниевна', 'Миканба Сафар Тарасович', 'Касландзия Ада Алексеевна'
 ]
 const_years = ['2020', '2021', '2022']
+const_times = ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00']
+const_session_types = [
+    'Беседа', 'Оглашение приговора или иного судебного акта', 'Предварительное судебное заседание',
+    'Судебное заседание', 'Досудебная подготовка (беседа)'
+]
 
 const_judges.sort(key=lambda x: x[0])

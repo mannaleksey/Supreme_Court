@@ -1,4 +1,9 @@
-{% extends 'main/base_State_History.html' %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/style_StateHistory.css' %}" media="all">
+{% endblock %}
 
 {% block title %}
 {{ title }}
@@ -214,4 +219,10 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/StateHistory.js' %}"></script>
+<script src="{% static 'js/HearingsCase.js' %}"></script>
+<script src="{% static 'js/table_docx.js' %}"></script>
 {% endblock %}

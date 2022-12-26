@@ -1,0 +1,108 @@
+<table class="custom_table">
+    <thead>
+        <tr>
+            <th>Номер дела</th>
+            <th>Стороны</th>
+            <th>Дата и время</th>
+            <th>Судья</th>
+            <th>Стадия</th>
+            <th>Суд</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in page_obj %}
+            <tr>
+                <td class="col1"><a target="_blank" href="/detail?ObjectID={{ data.ObjectID }}&type_of_legal_proceeding={{ data.type_of_legal_proceeding }}">{{ data.StringNumber }}</a></td>
+                {% if data.Victim or data.Accused or data.Plaintiff or data.Defendant or data.AttractedPerson %}
+
+                    {% with 'DecisionUS CaseListUS DecisionUA DecisionUNK DecisionUN' as list %}
+                        {% if data.type_of_legal_proceeding in list.split %}
+                            {% if data.Accused %}
+                                <td class="col2"><b>Обвиняемый: <br></b>{{ data.Accused }}</td>
+                            {% else %}
+                                {% if data.Defendant %}
+                                    <td class="col2"><b>Обвиняемый: <br></b>{{ data.Defendant }}</td>
+                                {% else %}
+                                    <td class="col2"></td>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endwith %}
+                    {% with 'DecisionAS CaseListAS DecisionDA DecisionAN' as list %}
+                        {% if data.type_of_legal_proceeding in list.split %}
+                            {% if data.Accused %}
+                                <td class="col2"><b>Привлекаемое лицо: <br></b>{{ data.Accused }}</td>
+                            {% else %}
+                                {% if data.AttractedPerson %}
+                                    <td class="col2"><b>Привлекаемое лицо: <br></b>{{ data.AttractedPerson }}</td>
+                                {% else %}
+                                    {% if data.Defendant %}
+                                        <td class="col2"><b>Привлекаемое лицо: <br></b>{{ data.Defendant }}</td>
+                                    {% else %}
+                                        <td class="col2"></td>
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endwith %}
+                    {% with 'DecisionAS CaseListAS DecisionDA DecisionAN DecisionUS CaseListUS DecisionUA DecisionUNK DecisionUN' as list %}
+                        {% if data.type_of_legal_proceeding not in list.split %}
+                            {% if data.Plaintiff or data.Defendant %}
+                                <td class="col2"><b>Истец: <br></b>{{ data.Plaintiff }}<br><b>Ответчик: <br></b>{{ data.Defendant }}</td>
+                            {% else %}
+                                {% if data.Victim or data.Accused %}
+                                    <td class="col2"><b>Истец: <br></b>{{ data.Victim }}<br><b>Ответчик: <br></b>{{ data.Accused }}</td>
+                                {% else %}
+                                    <td class="col2"></td>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endwith %}
+                {% else %}
+                    <td class="col2"></td>
+                {% endif %}
+                <td class="col3">{{ data.DateBegin.year }}-{{ data.DateBegin.month }}-{{ data.DateBegin.day }} <br>{{ data.TimeBegin }}</td>
+                {% if data.Judge %}
+                    <td class="col4">{{ data.Judge }}</td>
+                {% else %}
+                    <td class="col4">
+                    {% if data.PresidingJudge %}
+                        пред. {{ data.PresidingJudge }}
+                        {% if data.JudgeSpeaker or data.ThirdJudge or data.FourthJudge or data.FifthJudge %}
+                            ,
+                        {% endif %}
+                    {% endif %}
+                    {% if data.JudgeSpeaker %}
+                        {{ data.JudgeSpeaker }}
+                        {% if data.ThirdJudge or data.FourthJudge or data.FifthJudge %}
+                            ,
+                        {% endif %}
+                    {% endif %}
+                    {% if data.ThirdJudge %}
+                        {{ data.ThirdJudge }}
+                        {% if data.FourthJudge or data.FifthJudge %}
+                            ,
+                        {% endif %}
+                    {% endif %}
+                    {% if data.FourthJudge %}
+                        {{ data.FourthJudge }}
+                        {% if data.FifthJudge %}
+                            ,
+                        {% endif %}
+                    {% endif %}
+                    {% if data.FifthJudge %}
+                        {{ data.FifthJudge }}
+                    {% endif %}
+
+                    </td>
+                {% endif %}
+                <td class="col5">{{ data.SessionType }}</td>
+                {% for key, value in const_rev_courts_short.items %}
+                    {% if key == data.Court %}
+                        <td class="col6">{{ value }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,232 @@
+<form action="{% url 'hearing' %}" method="GET">
+    <div class="content--header_text">
+        <h4>ПОИСК ПО СУДЕБНЫМ ЗАСЕДАНИЯМ</h4>
+    </div>
+    <div class="form__container">
+        <div class="block_elements">
+            <div class="block__element">
+                <h2>Суд</h2>
+                <div class="select-box select-box_size_default">
+                    <div class="options-container">
+                        {% for court in courts %}
+                          <div class="option">
+                            <input type="radio" class="radio" id="Court_{{ court }}" name="Court" value="{{ court }}"
+                                {% if data_for_default.Court == court %}
+                                    checked
+                                {% endif %}
+                            />
+                            <label for="Court_{{ court }}">{{ court }}</label>
+                          </div>
+                        {% endfor %}
+                    </div>
+                    <div class="selected boarder_around">
+                        {% if data_for_default.Court %}
+                            {{ data_for_default.Court }}
+                        {% endif %}
+                        {% if not data_for_default.Court %}
+                            Выберите суд
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="block__element">
+                <h2>Инстанция</h2>
+                <div class="select-box select-box_size_default">
+                    <div class="options-container">
+                        {% for instance in instances %}
+                          <div class="option">
+                            <input type="radio" class="radio" id="Instance_{{ instance }}" name="Instance" value="{{ instance }}"
+                               {% if data_for_default.Instance == instance %}
+                               checked
+                               {% endif %}
+                            />
+                            <label for="Instance_{{ instance }}">{{ instance }}</label>
+                          </div>
+                        {% endfor %}
+                    </div>
+                    <div class="selected boarder_around">
+                        {% if data_for_default.Instance %}
+                            {{ data_for_default.Instance }}
+                        {% endif %}
+                        {% if not data_for_default.Instance %}
+                            Выберите инстанцию
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="block__element">
+                <h2>Вид судопроизводства</h2>
+                <div class="select-box select-box_size_default">
+                    <div class="options-container">
+                        {% for type_of_legal_proceeding in type_of_legal_proceedings %}
+                          <div class="option">
+                            <input type="radio" class="radio" id="type_of_legal_proceeding_{{ type_of_legal_proceeding }}" name="type_of_legal_proceeding" value="{{ type_of_legal_proceeding }}"
+                                {% if data_for_default.type_of_legal_proceeding == type_of_legal_proceeding %}
+                                   checked
+                                {% endif %}
+                            />
+                            <label for="type_of_legal_proceeding_{{ type_of_legal_proceeding }}">{{ type_of_legal_proceeding }}</label>
+                          </div>
+                        {% endfor %}
+                    </div>
+                    <div class="selected boarder_around">
+                        {% if data_for_default.type_of_legal_proceeding %}
+                            {{ data_for_default.type_of_legal_proceeding }}
+                        {% endif %}
+                        {% if not data_for_default.type_of_legal_proceeding %}
+                            Выберите вид судопроизводства
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="block__element">
+                <h2 class="form__label">Номер дела, материала, жалобы или<br>производства</h2>
+                {% if data_for_default.ObjectID %}
+                    <input type="text" class="form_input_id boarder_around" autocomplete="off" name="ObjectID" placeholder="например, 77OS0000-05-2018-008038-16" value="{{ data_for_default.ObjectID }}">
+
+                {% endif %}
+                {% if not data_for_default.ObjectID %}
+                    <input type="text" class="form_input_id boarder_around" autocomplete="off" name="ObjectID" placeholder="например, 77OS0000-05-2018-008038-16" value>
+                {% endif %}
+            </div>
+            <div class="block__element">
+                <h2>Судья</h2>
+                <div class="select-box select-box_size_default">
+                    <div class="options-container">
+                        {% for judge in judges %}
+                          <div class="option">
+                            <input type="radio" class="radio" id="Judge_{{ judge }}" name="Judge" value="{{ judge }}"
+
+                            {% if data_for_default.Judge == judge %}
+                                   checked
+                            {% endif %}
+                            />
+                            <label for="Judge_{{ judge }}">{{ judge }}</label>
+                          </div>
+                        {% endfor %}
+                    </div>
+                    <div class="selected boarder_around">
+                        {% if data_for_default.Judge %}
+                            {{ data_for_default.Judge }}
+                        {% endif %}
+                        {% if not data_for_default.Judge %}
+                            Выберите судью
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="block__element">
+                <h2>Дата судебного заседания</h2>
+                <input class="form_input_date_time_id boarder_around davaToday" type="date" name="DateSince"
+                {% if data_for_default.DateSince %}
+                       value="{{ data_for_default.DateSince }}"
+                {% endif %}
+                />
+                <input class="form_input_date_time_id boarder_around davaToday" type="date" name="DateTo"
+                {% if data_for_default.DateTo %}
+                       value="{{ data_for_default.DateTo }}"
+                {% endif %}
+                />
+
+            </div>
+            <div class="block__element">
+                <h2>Время судебного заседания</h2>
+                <div class="time_block">
+                    <div class="select-box select-box_size_half">
+                        <div class="options-container">
+                            {% for time_since in times_since %}
+                              <div class="option">
+                                <input type="radio" class="radio" id="TimeSince_{{ time_since }}" name="TimeSince" value="{{ time_since }}"
+                                    {% if data_for_default.TimeSince == time_since %}
+                                        checked
+                                    {% endif %}
+                                />
+                                <label for="TimeSince_{{ time_since }}">
+                                    {% if time_since != 'Не выбрано' %}
+                                        с
+                                    {% endif %}
+                                    {{ time_since }}</label>
+                              </div>
+                            {% endfor %}
+                        </div>
+                        <div class="selected boarder_around">
+                            {% if data_for_default.TimeSince %}
+                                с {{ data_for_default.TimeSince }}
+                            {% endif %}
+                            {% if not data_for_default.TimeSince %}
+                                с
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="select-box select-box_size_half">
+                            <div class="options-container">
+                                {% for time_to in times_to %}
+                                  <div class="option">
+                                    <input type="radio" class="radio" id="TimeTo_{{ time_to }}" name="TimeTo" value="{{ time_to }}"
+                                        {% if data_for_default.TimeTo == time_to %}
+                                            checked
+                                        {% endif %}
+                                    />
+                                    <label for="TimeTo_{{ time_to }}">
+                                        {% if time_to != 'Не выбрано' %}
+                                            по
+                                        {% endif %}
+                                        {{ time_to }}</label>
+                                  </div>
+                                {% endfor %}
+                            </div>
+                            <div class="selected boarder_around">
+                                {% if data_for_default.TimeTo %}
+                                    по {{ data_for_default.TimeTo }}
+                                {% endif %}
+                                {% if not data_for_default.TimeTo %}
+                                    по
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="block__element">
+                <h2>Стадия</h2>
+                <div class="select-box select-box_size_default">
+                    <div class="options-container">
+                        {% for session_type in session_types %}
+                          <div class="option">
+                            <input type="radio" class="radio" id="SessionType_{{ session_type }}" name="SessionType" value="{{ session_type }}"
+                                {% if data_for_default.SessionType == session_type %}
+                                    checked
+                                {% endif %}
+                            />
+                            <label for="SessionType_{{ session_type }}">{{ session_type }}</label>
+                          </div>
+                        {% endfor %}
+                    </div>
+                    <div class="selected boarder_around">
+                        {% if data_for_default.SessionType %}
+                            {{ data_for_default.SessionType }}
+                        {% endif %}
+                        {% if not data_for_default.SessionType %}
+                            Выберите стадию
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="block__element">
+                <h2 class="form__label">Стороны</h2>
+                {% if data_for_default.Name_people %}
+                    <input type="text" class="form_input_id boarder_around" autocomplete="off" name="Name_people" placeholder="Фамилия И.О. или наименование организации" value="{{ data_for_default.Name_people }}">
+
+                {% endif %}
+                {% if not data_for_default.Name_people %}
+                    <input type="text" class="form_input_id boarder_around" autocomplete="off" name="Name_people" placeholder="Фамилия И.О. или наименование организации" value>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="btn_div">
+        <input type="submit" value="Найти" class="btn" />
+        <div class="show_all">
+            <a href="{% url 'hearing' %}">Показать все</a>
+        </div>
+    </div>
+</form>

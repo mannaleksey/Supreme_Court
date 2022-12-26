@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'sud_zased',
 ]
 
 MIDDLEWARE = [
@@ -122,6 +123,7 @@ USE_TZ = True
 STATIC_DIR = BASE_DIR / 'main/static'
 STATICFILES_DIRS = [STATIC_DIR, ]
 STATIC_URL = 'static/'
+STATIC_ROOT = 'staticfiles/'
 
 
 # Default primary key field type

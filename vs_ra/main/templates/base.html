@@ -1,0 +1,60 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="1200">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block style %}{% endblock %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="{% static 'fonts/intro_regular.ttf' %}" rel="stylesheet" media="screen">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;0,900;1,300&&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/00c41af3ae.js" crossorigin="anonymous"></script>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+<header class="header">
+
+    <div class="header__search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
+    <div class="container">
+        <div class="header__inner">
+            <div class="block_logo">
+                <a href="https://vs-ra.org/"><img src="https://vs-ra.org/images/demo/logos/logo2022_2.png" class="logo" href="/"></a>
+<!--                    <img src="{% static 'img/logo.png' %}" class="logo">-->
+            </div>
+            <div class="header__avatar">
+                <div class="nav">
+                    <a class="nav__link" href="https://vs-ra.org/"><i class="fa fa-home"></i></a>
+                    <a class="nav__link" href="https://vs-ra.org/aboutvs"><h3>Общая информация</h3></a>
+                    <a class="nav__link" href="https://vs-ra.org/reestr-dokumentov"><h3>Документы</h3></a>
+                    <a class="nav__link" href="https://vs-ra.org/podacha-obrashchenij"><h3>Подача обращений </h3></a>
+                    <a class="nav__link" href="{% url 'search' %}"><h3>Поиск по судебным делам</h3></a>
+                    <a class="nav__link" href="https://vs-ra.org/press-tsentr"><h3>Информация для СМИ</h3></a>
+                    <a class="nav__link" href="https://vs-ra.org/kontakty"><h3>Контакты</h3></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
+
+<div class="content">
+    {% block content %}{% endblock %}
+</div>
+
+<footer class="footer">
+    <div class="footer__inner">
+        <div class="footer_info_name">
+            <h1>© 2022 Аҧсны Аҳәынҭқарра Иреиҳаӡоу Аӡбара | </h1>
+            <h1 class="footer_rus_name">Верховный суд Республики Абхазия</h1>
+        </div>
+    </div>
+</footer>
+</body>
+
+{% block scripts %}{% endblock %}
+</html>
+</html>

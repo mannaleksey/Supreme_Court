@@ -42,23 +42,31 @@ body {
 .header__inner {
   display: flex;
   flex-direction: column;
+  box-shadow: 0 7px 13px rgba(0, 0, 0, 0.15);
+}
+.header__inner .block_logo {
+  background-color: #ffffff;
+}
+.header__inner .block_logo img {
+  padding: 15px;
+  margin-right: auto;
+  margin-left: 50px;
 }
 .header__search {
-  background-color: #4f8a61;
-  border-bottom: 1px solid #fff;
+  background-color: #0b5d51;
+  padding: 15px 20px;
+  height: 67px;
 }
 .header__search i {
   color: #fff;
-  padding-top: 0.4rem;
-  padding-bottom: 0.4rem;
-  padding-right: 2rem;
-  height: 100%;
-  display: flex;
-  justify-content: flex-end;
+  float: right;
+  margin-top: 19px;
+  cursor: pointer;
+  padding: 0 0 0 5px;
 }
 .header__inner .header__avatar {
   border-bottom: 1px solid #fff;
-  display: flex;
+  display: block;
   justify-content: space-between;
   align-items: center;
   background-color: #0b5d51;
@@ -70,19 +78,17 @@ body {
 .nav {
   height: 100%;
   display: flex;
-  justify-content: space-around;
   align-items: center;
   position: relative;
+  margin-left: 50px;
 }
 .nav__link {
   display: flex;
   justify-content: center;
   padding: 0 1rem;
   align-items: center;
-  min-height: 100px;
-  max-height: 100px;
-  min-width: 140px;
-  max-width: 140px;
+  min-height: 100%;
+  max-height: 100%;
   height: 100%;
   color: #fff;
   position: relative;
@@ -90,35 +96,9 @@ body {
 }
 .nav__link h3 {
   font-family: 'Open Sans', sans-serif;
-  font-size: 1.1rem;
-  letter-spacing: 1px;
-  font-weight: 300;
-  z-index: 100;
-}
-.nav__link:nth-child(2n + 1) {
-  background-color: #14544b;
-}
-.nav__link:after {
-  content: "";
-  width: 100%;
-  height: 0;
-  background-color: #fff;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: 1;
-  transition: width 0.2s linear, height 0.2s linear, color 5s linear;
-}
-.nav__link:hover {
-  color: #0b5d51;
-}
-.nav__link:hover h3 {
-  letter-spacing: 0;
+  font-size: 14px;
   font-weight: 700;
-}
-.nav__link:hover:after {
-  width: 100%;
-  height: 100%;
+  z-index: 100;
 }
 form {
   max-height: 640px;
@@ -162,6 +142,7 @@ form {
   color: #374140;
   line-height: 1.4;
   align-self: center;
+  text-align: center;
 }
 .content--header_text h5 {
   padding: 2rem 1rem 0.5rem 1rem;

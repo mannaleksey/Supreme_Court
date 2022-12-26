@@ -1,4 +1,9 @@
-{% extends 'main/base.html' %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" media="all">
+{% endblock %}
 
 {% block title %}
 {{ title }}
@@ -23,4 +28,9 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/clear_get.js' %}"></script>
 {% endblock %}
