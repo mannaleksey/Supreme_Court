@@ -61,7 +61,7 @@
                 {% else %}
                     <td class="col2"></td>
                 {% endif %}
-                <td class="col3">{{ data.DateBegin.year }}-{{ data.DateBegin.month }}-{{ data.DateBegin.day }} <br>{{ data.TimeBegin }}</td>
+                <td class="col3">{{ data.DateBegin.year }}-{{ data.DateBegin.month }}-{{ data.DateBegin.day }} <br>{{ data.TimeBegin|time:'h:i' }}</td>
                 {% if data.Judge %}
                     <td class="col4">{{ data.Judge }}</td>
                 {% else %}
