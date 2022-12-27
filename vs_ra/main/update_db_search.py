@@ -3,6 +3,8 @@ import os
 import time
 import xml.etree.ElementTree as ET
 import gzip
+
+from .templates.const_for_form import const_type_of_legal_proceedings_sort
 from .all_keys import keys, keys_texts
 from .models import DataCase, TextsCase
 import io
@@ -10,6 +12,7 @@ import io
 
 
 def get_file_ftp(court):
+    approve_list = [j for i in const_type_of_legal_proceedings_sort for j in const_type_of_legal_proceedings_sort[i]]
     all_data = []
     all_data_texts = []
     host = f'search.vs-ra.org'
@@ -25,6 +28,8 @@ def get_file_ftp(court):
             file_list.remove('..')
             file_list.remove('.')
             for file in file_list:
+                if file.split('.')[0] not in approve_list:
+                    continue
                 c = 0
                 while True:
                     if c == 10:

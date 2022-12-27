@@ -13,7 +13,7 @@
     <tbody>
         {% for data in page_obj %}
             <tr>
-                <td class="col1"><a target="_blank" href="/detail?ObjectID={{ data.ObjectID }}&type_of_legal_proceeding={{ data.type_of_legal_proceeding }}">{{ data.StringNumber }}</a></td>
+                <td class="col1"><a target="_blank" href="/detail?Court={{ data.Court }}&type_of_legal_proceeding={{ data.type_of_legal_proceeding }}&StringNumber={{ data.StringNumber }}">{{ data.StringNumber }}</a></td>
                 {% if data.Victim or data.Accused or data.Plaintiff or data.Defendant or data.AttractedPerson %}
 
                     {% with 'DecisionUS CaseListUS DecisionUA DecisionUNK DecisionUN' as list %}

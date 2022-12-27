@@ -12,7 +12,7 @@ def reload_search(request):
     while True:
         try:
             refresh_db()
-            return render(request, 'main/db_success.html')
+            return render(request, 'db_success.html')
         except:
             pass
 
@@ -21,22 +21,26 @@ def reload_hearing(request):
     while True:
         try:
             refresh_db_hearing()
-            return render(request, 'main/db_success.html')
+            return render(request, 'db_success.html')
         except:
             pass
 
 
 def detail(request):
     try:
+        type_of_legal_proceeding = request.GET['type_of_legal_proceeding']
+        approve_list = [j for i in const_type_of_legal_proceedings_sort for j in const_type_of_legal_proceedings_sort[i]]
+        if type_of_legal_proceeding not in approve_list:
+            type_of_legal_proceeding = 'Decision' + type_of_legal_proceeding[8:]
         filters = {
-            'ObjectID': request.GET['ObjectID'],
-            'type_of_legal_proceeding': request.GET['type_of_legal_proceeding']
+            'Court': request.GET['Court'],
+            'StringNumber': request.GET['StringNumber'],
+            'type_of_legal_proceeding': type_of_legal_proceeding,
         }
         data_case = DataCase.objects.all().filter(**filters)
         data_case_texts = TextsCase.objects.all()
         docx_base64, name_on_site, name_doc, date_doc = '', '', '', ''
         try:
-            type_of_legal_proceeding = data_case[0].type_of_legal_proceeding
             if type_of_legal_proceeding.find('Decision') != -1:
                 end_str = type_of_legal_proceeding[8:]
                 if end_str == 'KAS':
