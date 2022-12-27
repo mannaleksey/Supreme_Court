@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="{% static 'fonts/intro_regular.ttf' %}" rel="stylesheet" media="screen">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;0,900;1,300&&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/00c41af3ae.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>{% block title %}{% endblock %}</title>
 </head>
 
@@ -17,7 +17,6 @@
 <header class="header">
 
     <div class="header__search">
-        <i class="fa-solid fa-magnifying-glass"></i>
     </div>
     <div class="container">
         <div class="header__inner">
@@ -27,11 +26,11 @@
             </div>
             <div class="header__avatar">
                 <div class="nav">
-                    <a class="nav__link" href="https://vs-ra.org/"><i class="fa fa-home"></i></a>
+                    <a class="nav__link" href="https://vs-ra.org/"><i class="fa fa-home" aria-hidden="true"></i></a>
                     <a class="nav__link" href="https://vs-ra.org/aboutvs"><h3>Общая информация</h3></a>
                     <a class="nav__link" href="https://vs-ra.org/reestr-dokumentov"><h3>Документы</h3></a>
                     <a class="nav__link" href="https://vs-ra.org/podacha-obrashchenij"><h3>Подача обращений </h3></a>
-                    <a class="nav__link" href="{% url 'search' %}"><h3>Поиск по судебным делам</h3></a>
+                    {% block nav_search %}{% endblock %}
                     <a class="nav__link" href="https://vs-ra.org/press-tsentr"><h3>Информация для СМИ</h3></a>
                     <a class="nav__link" href="https://vs-ra.org/kontakty"><h3>Контакты</h3></a>
                 </div>

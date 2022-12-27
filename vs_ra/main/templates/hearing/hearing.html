@@ -9,6 +9,10 @@
 {{ title }}
 {% endblock %}
 
+{% block nav_search %}
+<a class="nav__link" href="{% url 'search' %}"><h3>Поиск по судебным делам</h3></a>
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <div class="content__inner">

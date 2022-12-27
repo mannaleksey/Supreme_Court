@@ -5,7 +5,6 @@
             <th>Стороны</th>
             <th>Дата и время</th>
             <th>Судья</th>
-            <th>Стадия</th>
             <th>Суд</th>
         </tr>
     </thead>
@@ -96,7 +95,6 @@
 
                     </td>
                 {% endif %}
-                <td class="col5">{{ data.SessionType }}</td>
                 {% for key, value in const_rev_courts_short.items %}
                     {% if key == data.Court %}
                         <td class="col6">{{ value }}</td>

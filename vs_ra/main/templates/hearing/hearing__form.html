@@ -183,31 +183,6 @@
                                     по
                                 {% endif %}
                             </div>
-                        </div>
-                    </div>
-                </div>
-            <div class="block__element">
-                <h2>Стадия</h2>
-                <div class="select-box select-box_size_default">
-                    <div class="options-container">
-                        {% for session_type in session_types %}
-                          <div class="option">
-                            <input type="radio" class="radio" id="SessionType_{{ session_type }}" name="SessionType" value="{{ session_type }}"
-                                {% if data_for_default.SessionType == session_type %}
-                                    checked
-                                {% endif %}
-                            />
-                            <label for="SessionType_{{ session_type }}">{{ session_type }}</label>
-                          </div>
-                        {% endfor %}
-                    </div>
-                    <div class="selected boarder_around">
-                        {% if data_for_default.SessionType %}
-                            {{ data_for_default.SessionType }}
-                        {% endif %}
-                        {% if not data_for_default.SessionType %}
-                            Выберите стадию
-                        {% endif %}
                     </div>
                 </div>
             </div>

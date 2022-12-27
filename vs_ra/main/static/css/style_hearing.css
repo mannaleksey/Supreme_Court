@@ -75,6 +75,9 @@ body {
   padding: 1rem;
   width: 20rem;
 }
+.header__avatar {
+  height: 50px;
+}
 .nav {
   height: 100%;
   display: flex;
@@ -83,13 +86,13 @@ body {
   margin-left: 50px;
 }
 .nav__link {
+  height: 50px;
   display: flex;
   justify-content: center;
   padding: 0 1rem;
   align-items: center;
   min-height: 100%;
   max-height: 100%;
-  height: 100%;
   color: #fff;
   position: relative;
   text-decoration: none;
@@ -97,8 +100,42 @@ body {
 .nav__link h3 {
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   z-index: 100;
+}
+.nav__link:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-bottom: 3px solid;
+  border-radius: 3px;
+  color: #ffffff;
+  max-width: 97%;
+  transform: scale(0) translateZ(0);
+  -webkit-transition: -webkit-transform 0.45s ease, opacity 0.55s ease;
+  -moz-transition: -moz-transform 0.45s ease, opacity 0.55s ease;
+  -ms-transition: -ms-transform 0.45s ease, opacity 0.55s ease;
+  -o-transition: -o-transform 0.45s ease, opacity 0.55s ease;
+  transition: transform 0.45s ease, opacity 0.55s ease;
+}
+.nav__link:hover:before {
+  transform: scale(1) translateZ(0);
+  transition: transform 0.45s ease, opacity 0.55s ease;
+  color: #eb0001;
+}
+.current-item:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-bottom: 3px solid;
+  border-radius: 3px;
+  color: #eb0001;
+  width: 97%;
+  transform: scale(1) translateZ(0);
 }
 form {
   max-height: 783px;
@@ -475,12 +512,14 @@ form {
   margin-top: 1rem;
 }
 .footer__inner {
-  margin-left: 20rem;
   padding: 1rem;
 }
 .footer__inner h1 {
   font-weight: 300;
   font-size: 0.8rem;
+}
+.footer__inner .footer_info_name {
+  text-align: center;
 }
 .footer_rus_name {
   padding-left: 1.1rem;
