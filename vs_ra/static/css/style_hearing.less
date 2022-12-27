@@ -1,0 +1,43 @@
+@import "vars";
+
+
+// convert: true;
+
+
+html {
+    font-size: 15px;
+}
+
+body, html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    background: url("https://vs-ra.org/images/headers/bg_05.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    min-width: 1200px;
+    @media @tablet {
+        height: 123%;
+    }
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+/* Block */
+
+@import "blocks_hearing/container";
+@import "blocks_hearing/header_logo";
+@import "blocks_hearing/header_nav";
+@import "blocks_hearing/form";
+@import "blocks_hearing/pagination";
+@import "blocks_hearing/table";
+@import "blocks_hearing/footer";

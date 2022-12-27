@@ -1,0 +1,18 @@
+.footer {
+  color: #fff;
+  flex-shrink: 0;
+  background-color: #0b5d51;
+  margin-top: 1rem;
+}
+.footer__inner {
+  margin-left: 20rem;
+  padding: 1rem;
+}
+.footer__inner h1 {
+  font-weight: 300;
+  font-size: 0.8rem;
+}
+.footer_rus_name {
+  padding-left: 1.1rem;
+}
+/*# sourceMappingURL=footer.css.map */
