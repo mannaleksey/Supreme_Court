@@ -19,7 +19,7 @@ body {
   font-size: 1rem;
   display: flex;
   flex-direction: column;
-  min-width: 1200px;
+  min-width: 1400px;
 }
 @media (max-width: 1097px) {
   body {
@@ -34,7 +34,7 @@ body {
 /* Block */
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   padding-left: 1rem;
   padding-right: 1rem;
   margin: 0 auto;
@@ -145,6 +145,7 @@ form {
   flex-direction: column;
   align-items: center;
   align-content: center;
+  min-width: 360px;
 }
 .form__container {
   display: flex;
@@ -171,7 +172,7 @@ form {
   width: 100%;
 }
 .content--header_text h4 {
-  padding: 1rem 3.7rem;
+  padding: 1rem;
   margin: 0;
   font-family: 'IntroRegular', sans-serif;
   font-size: 1.1rem;
@@ -190,6 +191,9 @@ form {
   color: #374140;
   align-self: flex-end;
   line-height: 1.4;
+}
+.content--form-text {
+  justify-content: center;
 }
 .select-box {
   display: flex;
@@ -288,11 +292,27 @@ form {
   background: #e4eaef;
   padding: 6px;
   border-radius: 3px;
-  width: 280px;
+  width: 290px;
   outline: none;
   font-size: 14px;
 }
 .form_input_id::-webkit-input-placeholder {
+  font-size: 0.8rem;
+}
+.form_input_date_time_id {
+  border: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #e4eaef;
+  padding: 6px;
+  border-radius: 3px;
+  width: 145px;
+  outline: none;
+  font-size: 14px;
+}
+.form_input_date_time_id::-webkit-input-placeholder {
   font-size: 0.8rem;
 }
 .btn_div {
@@ -407,8 +427,8 @@ form {
   }
 }
 .upper_wrapper {
-  max-width: 800px;
   min-width: 800px;
+  width: 100%;
 }
 .wrapper-search-tables {
   display: flex;
@@ -419,24 +439,6 @@ form {
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
   font-size: 0.7rem;
-}
-.wrapper-search-tables .col1 {
-  padding: 0.5rem 1rem;
-  white-space: nowrap;
-  text-align: center;
-}
-.wrapper-search-tables .col4 {
-  width: 180px;
-}
-.wrapper-search-tables .col5 {
-  white-space: nowrap;
-}
-.wrapper-search-tables .col2 {
-  width: 150px;
-}
-.wrapper-search-tables .col3 {
-  word-break: break-all;
-  max-width: 100px;
 }
 .wrapper-search-tables .custom_table {
   max-width: 99%;
@@ -474,6 +476,23 @@ form {
 }
 .wrapper-search-tables .custom_table tr {
   height: 50px;
+}
+.wrapper-search-tables .col1 {
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  text-align: center;
+}
+.wrapper-search-tables .col2 {
+  min-width: 150px;
+}
+.wrapper-search-tables .col3 {
+  min-width: 100px;
+}
+.wrapper-search-tables .col4 {
+  min-width: 180px;
+}
+.wrapper-search-tables .col5 {
+  white-space: nowrap;
 }
 .content_details {
   padding: 15px 40px;

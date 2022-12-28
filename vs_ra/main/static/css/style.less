@@ -1,36 +1,4 @@
-@import "vars";
-
-
-// convert: true;
-
-
-html {
-    font-size: 15px;
-}
-
-body, html {
-    height: 100%;
-}
-
-body {
-    margin: 0;
-    font-family: 'Open Sans', sans-serif;
-    background: url("https://vs-ra.org/images/headers/bg_05.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    font-size: 1rem;
-    display: flex;
-    flex-direction: column;
-    min-width: 1200px;
-    @media @tablet {
-        height: 123%;
-    }
-}
-
-*, *:before, *:after {
-    box-sizing: border-box;
-}
+@import "default_styles";
 
 /* Block */
 
@@ -40,5 +8,6 @@ body {
 @import "blocks/form";
 @import "blocks/pagination";
 @import "blocks/table";
+@import "blocks/width_columns";
 @import "blocks/content_details";
 @import "blocks/footer";

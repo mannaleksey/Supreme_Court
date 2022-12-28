@@ -102,7 +102,7 @@
                 <td class="col7">
                     {% with 'DecisionKAS CaseListKAS DecisionCAKAS DecisionCNKKAS DecisionCNKAS' as list %}
                         {% if data.type_of_legal_proceeding in list.split %}
-                            Администр-<br>ативное
+                            Административное
                         {% endif %}
                     {% endwith %}
                     {% with 'DecisionCS CaseListCS DecisionCA DecisionCNK DecisionC' as list %}
@@ -112,7 +112,7 @@
                     {% endwith %}
                     {% with 'DecisionAS CaseListAS DecisionDA DecisionAN' as list %}
                         {% if data.type_of_legal_proceeding in list.split %}
-                            Об администр-<br>ативных право-<br>нарушениях
+                            Об административных правонарушениях
                         {% endif %}
                     {% endwith %}
                     {% with 'DecisionUS CaseListUS DecisionUA DecisionUNK DecisionUN' as list %}

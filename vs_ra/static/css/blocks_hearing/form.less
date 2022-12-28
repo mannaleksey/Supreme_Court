@@ -1,14 +1,14 @@
-// main: ../style.less
+// hearing: ../style.less
 
 form {
-  max-height: 783px;;
+  max-height: 723px;
   background-color: #ffffffc9;
   border-radius: 0 0 15px 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
   align-content: center;
-
+  min-width: 360px;
 }
 
 .form__container {
@@ -30,10 +30,10 @@ form {
   display: flex;
 }
 
-@import "content";
+@import "../blocks/content";
 @import "dropdown";
-@import "input_id";
-@import "button_submit";
+@import "../blocks/input_id";
+@import "../blocks/button_submit";
 
 
 .boarder_around {

@@ -1,0 +1,18 @@
+.wrapper-search-tables .col1 {
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  text-align: center;
+}
+.wrapper-search-tables .col2 {
+  width: 150px;
+}
+.wrapper-search-tables .col3 {
+  max-width: 63px;
+}
+.wrapper-search-tables .col4 {
+  width: 180px;
+}
+.wrapper-search-tables .col5 {
+  max-width: 100px;
+}
+/*# sourceMappingURL=width_columns.css.map */

@@ -19,7 +19,7 @@ body {
   font-size: 1rem;
   display: flex;
   flex-direction: column;
-  min-width: 1200px;
+  min-width: 1400px;
 }
 @media (max-width: 1097px) {
   body {
@@ -34,7 +34,7 @@ body {
 /* Block */
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   padding-left: 1rem;
   padding-right: 1rem;
   margin: 0 auto;
@@ -138,13 +138,14 @@ body {
   transform: scale(1) translateZ(0);
 }
 form {
-  max-height: 783px;
+  max-height: 723px;
   background-color: #ffffffc9;
   border-radius: 0 0 15px 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
   align-content: center;
+  min-width: 360px;
 }
 .form__container {
   display: flex;
@@ -174,7 +175,7 @@ form {
   width: 100%;
 }
 .content--header_text h4 {
-  padding: 1rem 3.7rem;
+  padding: 1rem;
   margin: 0;
   font-family: 'IntroRegular', sans-serif;
   font-size: 1.1rem;
@@ -193,6 +194,9 @@ form {
   color: #374140;
   align-self: flex-end;
   line-height: 1.4;
+}
+.content--form-text {
+  justify-content: center;
 }
 .select-box_size_default {
   width: 290px;
@@ -319,13 +323,6 @@ form {
 .form_input_date_time_id::-webkit-input-placeholder {
   font-size: 0.8rem;
 }
-.time_id::-webkit-datetime-edit-second-field {
-  background: #ffffff;
-  color: transparent;
-  margin-left: -3px;
-  position: absolute;
-  width: 1px;
-}
 .btn_div {
   display: flex;
   align-items: center;
@@ -438,8 +435,8 @@ form {
   }
 }
 .upper_wrapper {
-  max-width: 800px;
   min-width: 800px;
+  width: 100%;
 }
 .wrapper-search-tables {
   display: flex;
@@ -450,23 +447,6 @@ form {
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
   font-size: 0.7rem;
-}
-.wrapper-search-tables .col1 {
-  padding: 0.5rem 1rem;
-  white-space: nowrap;
-  text-align: center;
-}
-.wrapper-search-tables .col2 {
-  width: 150px;
-}
-.wrapper-search-tables .col3 {
-  max-width: 63px;
-}
-.wrapper-search-tables .col4 {
-  width: 180px;
-}
-.wrapper-search-tables .col5 {
-  max-width: 100px;
 }
 .wrapper-search-tables .custom_table {
   max-width: 99%;
@@ -504,6 +484,20 @@ form {
 }
 .wrapper-search-tables .custom_table tr {
   height: 50px;
+}
+.wrapper-search-tables .col1 {
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  text-align: center;
+}
+.wrapper-search-tables .col2 {
+  min-width: 150px;
+}
+.wrapper-search-tables .col4 {
+  min-width: 180px;
+}
+.wrapper-search-tables .col5 {
+  min-width: 200px;
 }
 .footer {
   color: #fff;
