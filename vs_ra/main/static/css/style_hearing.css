@@ -316,7 +316,7 @@ form {
   background: #e4eaef;
   padding: 6px;
   border-radius: 3px;
-  width: 145px;
+  width: 143px;
   outline: none;
   font-size: 14px;
 }
@@ -483,7 +483,7 @@ form {
   background-color: #e4eaef;
 }
 .wrapper-search-tables .custom_table tr:first-child td {
-  padding-top: 7px;
+  padding-top: 10px;
 }
 .wrapper-search-tables .custom_table tr {
   height: 50px;
