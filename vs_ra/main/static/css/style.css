@@ -197,7 +197,7 @@ form {
 }
 .select-box {
   display: flex;
-  width: 280px;
+  width: 290px;
   flex-direction: column;
   position: relative;
 }
@@ -473,6 +473,9 @@ form {
 }
 .wrapper-search-tables .custom_table tr:nth-child(even) {
   background-color: #e4eaef;
+}
+.wrapper-search-tables .custom_table tr:first-child td {
+  padding-top: 7px;
 }
 .wrapper-search-tables .custom_table tr {
   height: 50px;

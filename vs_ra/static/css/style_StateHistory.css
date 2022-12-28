@@ -197,7 +197,7 @@ form {
 }
 .select-box {
   display: flex;
-  width: 280px;
+  width: 290px;
   flex-direction: column;
   position: relative;
 }
