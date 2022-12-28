@@ -19,7 +19,7 @@ body {
   font-size: 1rem;
   display: flex;
   flex-direction: column;
-  min-width: 1400px;
+  min-width: 1280px;
 }
 @media (max-width: 1097px) {
   body {
@@ -34,7 +34,7 @@ body {
 /* Block */
 .container {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1280px;
   padding-left: 1rem;
   padding-right: 1rem;
   margin: 0 auto;
