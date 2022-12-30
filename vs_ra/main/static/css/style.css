@@ -19,7 +19,7 @@ body {
   font-size: 1rem;
   display: flex;
   flex-direction: column;
-  min-width: 1280px;
+  min-width: 1200px;
 }
 @media (max-width: 1097px) {
   body {
@@ -34,7 +34,7 @@ body {
 /* Block */
 .container {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1200px;
   padding-left: 1rem;
   padding-right: 1rem;
   margin: 0 auto;
@@ -138,7 +138,7 @@ body {
   transform: scale(1) translateZ(0);
 }
 form {
-  max-height: 640px;
+  height: 100%;
   background-color: #ffffffc9;
   border-radius: 0 0 15px 15px;
   display: flex;
@@ -480,19 +480,8 @@ form {
 .wrapper-search-tables .custom_table tr {
   height: 50px;
 }
-.wrapper-search-tables .col1 {
-  padding: 0.5rem 1rem;
-  white-space: nowrap;
-  text-align: center;
-}
-.wrapper-search-tables .col2 {
-  min-width: 150px;
-}
-.wrapper-search-tables .col3 {
-  min-width: 100px;
-}
 .wrapper-search-tables .col4 {
-  min-width: 180px;
+  min-width: 124px;
 }
 .wrapper-search-tables .col5 {
   white-space: nowrap;
